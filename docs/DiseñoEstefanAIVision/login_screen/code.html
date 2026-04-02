@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Estefan AI Vision - Login</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-bright": "#fef8f3",
+              "tertiary-fixed": "#7cf6ec",
+              "inverse-surface": "#32302d",
+              "on-secondary-fixed-variant": "#5e4200",
+              "error-container": "#ffdad6",
+              "surface-tint": "#5d5c74",
+              "primary-container": "#1a1a2e",
+              "on-primary": "#ffffff",
+              "secondary": "#7b5806",
+              "secondary-container": "#fdcd75",
+              "on-error": "#ffffff",
+              "on-primary-fixed-variant": "#45455b",
+              "secondary-fixed": "#ffdea6",
+              "tertiary-fixed-dim": "#5dd9d0",
+              "primary-fixed-dim": "#c6c4df",
+              "background": "#fef8f3",
+              "on-secondary-container": "#785503",
+              "on-tertiary-fixed": "#00201e",
+              "on-error-container": "#93000a",
+              "on-primary-fixed": "#1a1a2e",
+              "tertiary-container": "#00201e",
+              "surface-variant": "#e6e2dd",
+              "error": "#ba1a1a",
+              "outline-variant": "#c8c5cd",
+              "surface-dim": "#ded9d4",
+              "outline": "#78767d",
+              "surface-container-low": "#f8f3ee",
+              "primary-fixed": "#e2e0fc",
+              "surface-container-highest": "#e6e2dd",
+              "on-primary-container": "#83829b",
+              "on-secondary": "#ffffff",
+              "on-tertiary-container": "#00948c",
+              "inverse-primary": "#c6c4df",
+              "surface-container": "#f2ede8",
+              "tertiary": "#000000",
+              "on-secondary-fixed": "#271900",
+              "surface-container-high": "#ece7e2",
+              "on-surface": "#1d1b19",
+              "on-background": "#1d1b19",
+              "inverse-on-surface": "#f5f0eb",
+              "surface": "#fef8f3",
+              "surface-container-lowest": "#ffffff",
+              "on-surface-variant": "#47464c",
+              "on-tertiary": "#ffffff",
+              "on-tertiary-fixed-variant": "#00504c",
+              "primary": "#00000b",
+              "secondary-fixed-dim": "#eec069"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif", "serif"],
+              "body": ["Manrope", "sans-serif"],
+              "label": ["Manrope", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .barber-texture {
+            background-color: #1a1a2e;
+            background-image: linear-gradient(45deg, #161625 25%, transparent 25%, transparent 75%, #161625 75%, #161625), 
+                              linear-gradient(45deg, #161625 25%, transparent 25%, transparent 75%, #161625 75%, #161625);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
+            opacity: 0.4;
+        }
+        .glass-panel {
+            background: rgba(26, 26, 46, 0.8);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body bg-primary-container min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
+<!-- Background Texture Overlay -->
+<div class="absolute inset-0 barber-texture pointer-events-none"></div>
+<!-- Decorative Radial Glow -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-secondary/5 rounded-full blur-[120px] pointer-events-none"></div>
+<main class="relative z-10 w-full max-w-md px-8 py-12 flex flex-col items-center">
+<!-- Logo Section -->
+<div class="mb-10 text-center">
+<div class="inline-block relative mb-6">
+<div class="absolute inset-0 bg-secondary/20 blur-xl rounded-full"></div>
+<img alt="EA Monogram" class="relative w-24 h-24 object-contain" data-alt="Sophisticated gold monogram logo with letters E and A intertwined in a classical serif style on a dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxpfxWKJ98nrHayd5FNgKEwfO3kMiEQwDjbIlDqXPxFd9hdvSokEhuLcGLQRm-SV_CjM6yQtsAhvVDMevFzn2B22v-i0Ij2E3A9D5BdlpuYSi3sW75pR384YrB_yf7kxpcbkx46MfmzseYS4Opc1P2jmckYkZxmYX2E8cIc9ofeUPnB8m7_zJSpytilWMPfg7xDBVrdrZufo5qhQ6z3-X4b_f5tRaZefulx-Q7SfORVnKyR91Ea6U1YDKxg0TV4H6Al1RL9YTxyTg"/>
+</div>
+<div class="space-y-1">
+<p class="font-label uppercase tracking-[0.3em] text-[10px] text-secondary-fixed-dim/70">Artificial Intelligence</p>
+<h1 class="font-headline text-4xl font-bold text-surface tracking-tighter italic">Estefan AI Vision</h1>
+</div>
+</div>
+<!-- Login Form Container -->
+<div class="w-full glass-panel p-8 rounded-xl shadow-2xl border border-white/5">
+<form action="#" class="space-y-6">
+<div class="space-y-4">
+<!-- Email Field -->
+<div class="space-y-2">
+<label class="font-label text-xs uppercase tracking-widest text-surface-variant/60 ml-1" for="email">Email Address</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-surface-variant/40 group-focus-within:text-secondary transition-colors">mail</span>
+<input class="w-full bg-primary/40 border-outline-variant/20 border-b-2 border-x-0 border-t-0 text-surface placeholder:text-surface-variant/30 py-4 pl-12 pr-4 focus:ring-0 focus:border-secondary focus:bg-primary/60 transition-all outline-none rounded-t-lg" id="email" name="email" placeholder="barber@estefan.ai" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-2">
+<label class="font-label text-xs uppercase tracking-widest text-surface-variant/60 ml-1" for="password">Password</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-surface-variant/40 group-focus-within:text-secondary transition-colors">lock</span>
+<input class="w-full bg-primary/40 border-outline-variant/20 border-b-2 border-x-0 border-t-0 text-surface placeholder:text-surface-variant/30 py-4 pl-12 pr-4 focus:ring-0 focus:border-secondary focus:bg-primary/60 transition-all outline-none rounded-t-lg" id="password" name="password" placeholder="••••••••" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-surface-variant/40 hover:text-secondary transition-colors" type="button">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between py-2">
+<label class="flex items-center space-x-2 cursor-pointer group">
+<input class="w-4 h-4 rounded border-outline-variant/30 bg-primary-container text-secondary focus:ring-secondary/20" type="checkbox"/>
+<span class="text-xs text-surface-variant/60 group-hover:text-surface-variant transition-colors">Remember me</span>
+</label>
+<a class="text-xs text-secondary hover:text-secondary-fixed transition-colors font-medium" href="#">Forgot Password?</a>
+</div>
+<!-- CTA Button -->
+<button class="w-full bg-secondary hover:bg-secondary-fixed-dim text-primary-container font-bold py-4 rounded-lg shadow-[0_4px_20px_rgba(123,88,6,0.3)] transform transition-all active:scale-95 flex items-center justify-center space-x-2" type="submit">
+<span class="uppercase tracking-widest text-sm">Entrar</span>
+<span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</form>
+<div class="mt-8 pt-6 border-t border-white/5 text-center">
+<p class="text-sm text-surface-variant/40">
+                    Don't have an account? 
+                    <a class="text-secondary font-semibold hover:underline decoration-secondary/30 underline-offset-4 ml-1" href="#">Request Access</a>
+</p>
+</div>
+</div>
+<!-- Secondary Auth Options -->
+<div class="mt-8 flex items-center space-x-4 w-full opacity-60">
+<div class="h-px flex-1 bg-surface-variant/10"></div>
+<span class="text-[10px] uppercase tracking-widest text-surface-variant/40">Authorized Atelier Platform</span>
+<div class="h-px flex-1 bg-surface-variant/10"></div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="mt-auto pb-8 relative z-10 w-full text-center">
+<p class="font-label text-[10px] uppercase tracking-[0.2em] text-surface-variant/30">
+            © 2026 Estefan Acosta Barber Shop
+        </p>
+<div class="mt-2 flex justify-center space-x-4 opacity-20 hover:opacity-40 transition-opacity">
+<span class="material-symbols-outlined text-sm text-surface">verified_user</span>
+<span class="material-symbols-outlined text-sm text-surface">encrypted</span>
+<span class="material-symbols-outlined text-sm text-surface">auto_awesome</span>
+</div>
+</footer>
+</body></html>

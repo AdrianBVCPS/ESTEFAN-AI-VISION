@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-bright": "#fef8f3",
+              "tertiary-fixed": "#7cf6ec",
+              "inverse-surface": "#32302d",
+              "on-secondary-fixed-variant": "#5e4200",
+              "error-container": "#ffdad6",
+              "surface-tint": "#5d5c74",
+              "primary-container": "#1a1a2e",
+              "on-primary": "#ffffff",
+              "secondary": "#7b5806",
+              "secondary-container": "#fdcd75",
+              "on-error": "#ffffff",
+              "on-primary-fixed-variant": "#45455b",
+              "secondary-fixed": "#ffdea6",
+              "tertiary-fixed-dim": "#5dd9d0",
+              "primary-fixed-dim": "#c6c4df",
+              "background": "#fef8f3",
+              "on-secondary-container": "#785503",
+              "on-tertiary-fixed": "#00201e",
+              "on-error-container": "#93000a",
+              "on-primary-fixed": "#1a1a2e",
+              "tertiary-container": "#00201e",
+              "surface-variant": "#e6e2dd",
+              "error": "#ba1a1a",
+              "outline-variant": "#c8c5cd",
+              "surface-dim": "#ded9d4",
+              "outline": "#78767d",
+              "surface-container-low": "#f8f3ee",
+              "primary-fixed": "#e2e0fc",
+              "surface-container-highest": "#e6e2dd",
+              "on-primary-container": "#83829b",
+              "on-secondary": "#ffffff",
+              "on-tertiary-container": "#00948c",
+              "inverse-primary": "#c6c4df",
+              "surface-container": "#f2ede8",
+              "tertiary": "#000000",
+              "on-secondary-fixed": "#271900",
+              "surface-container-high": "#ece7e2",
+              "on-surface": "#1d1b19",
+              "on-background": "#1d1b19",
+              "inverse-on-surface": "#f5f0eb",
+              "surface": "#fef8f3",
+              "surface-container-lowest": "#ffffff",
+              "on-surface-variant": "#47464c",
+              "on-tertiary": "#ffffff",
+              "on-tertiary-fixed-variant": "#00504c",
+              "primary": "#00000b",
+              "secondary-fixed-dim": "#eec069"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .viewfinder-mask {
+            mask-image: radial-gradient(ellipse 55% 65% at 50% 50%, transparent 100%, black 100%);
+            -webkit-mask-image: radial-gradient(ellipse 45% 55% at 50% 50%, transparent 99%, black 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-primary-container font-body text-on-primary-container overflow-hidden h-screen flex flex-col">
+<!-- Top Navigation Anchor -->
+<header class="bg-[#fef8f3] dark:bg-[#1a1a2e] flex justify-between items-center w-full px-6 h-16 fixed top-0 backdrop-blur-md bg-opacity-80 z-50">
+<div class="flex items-center gap-2">
+<span class="font-serif italic text-xl text-[#7b5806] dark:text-[#7b5806]">EA</span>
+<h1 class="font-serif text-2xl tracking-tighter text-[#1a1a2e] dark:text-[#fef8f3]">Estefan AI Vision</h1>
+</div>
+<button class="text-[#1a1a2e] dark:text-[#fef8f3] hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+</button>
+</header>
+<!-- Main Viewport (Camera Area) -->
+<main class="relative flex-1 bg-black mt-16 flex items-center justify-center overflow-hidden">
+<!-- Mock Camera Feed -->
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-slate-900 opacity-40"></div>
+<!-- Background Image Mockup for Camera Context -->
+<img alt="Barber shop interior background with soft lighting" class="w-full h-full object-cover opacity-60 grayscale" data-alt="blurred interior of a high-end luxury barber shop with leather chairs and vintage mirrors under warm ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFBbrrtAbKYyUVQJT1vzWERxk_5ab2JwWOM_ZOENNtr1q9k9xposOEZvSGQkRrS6BNOIbEVIRRrSV4lXW1-b73CFm1ugNLccWvceRXQJvGEzwumK9XeglbmjNKVWO9NFl-EoaK4Ip9VI_y30ZE1sVEbJlMkC-_hS3Wmr38OnmTaBA7OQyoJFkdMoBp72bbQiJVWkj_SV423UQ96uwnXGem7uff5-_QZHVdpdOBpPLVx4ixNj03uMUrUuyEaTsl7zmp4bvVN3XTQUk"/>
+</div>
+<!-- Face Guide Overlay -->
+<div class="absolute inset-0 z-10 pointer-events-none flex items-center justify-center">
+<!-- Semi-transparent gold oval guide -->
+<div class="w-[280px] h-[400px] border-2 border-secondary/40 rounded-[140px/200px] relative">
+<!-- Corner Indicators -->
+<div class="absolute -top-1 -left-1 w-8 h-8 border-t-4 border-l-4 border-secondary rounded-tl-[40px]"></div>
+<div class="absolute -top-1 -right-1 w-8 h-8 border-t-4 border-r-4 border-secondary rounded-tr-[40px]"></div>
+<div class="absolute -bottom-1 -left-1 w-8 h-8 border-b-4 border-l-4 border-secondary rounded-bl-[40px]"></div>
+<div class="absolute -bottom-1 -right-1 w-8 h-8 border-b-4 border-r-4 border-secondary rounded-br-[40px]"></div>
+<!-- EA Monogram Watermark -->
+<div class="absolute inset-0 flex items-center justify-center opacity-10">
+<span class="font-headline text-8xl text-secondary italic select-none">EA</span>
+</div>
+</div>
+</div>
+<!-- Top Indicator UI -->
+<div class="absolute top-8 left-0 right-0 z-20 px-8 flex flex-col items-center gap-4">
+<div class="flex flex-col items-center gap-2">
+<span class="font-label uppercase tracking-widest text-[10px] text-white/70">Foto 1/3: Frontal</span>
+<!-- 3-segment progress bar -->
+<div class="flex gap-2 w-48">
+<div class="h-1 flex-1 bg-secondary rounded-full shadow-[0_0_8px_rgba(123,88,6,0.6)]"></div>
+<div class="h-1 flex-1 bg-white/20 rounded-full"></div>
+<div class="h-1 flex-1 bg-white/20 rounded-full"></div>
+</div>
+</div>
+<div class="bg-primary-container/80 backdrop-blur-md px-6 py-2 rounded-full border border-outline-variant/10">
+<p class="text-white text-sm font-medium tracking-wide">Centra el rostro del cliente en la guía</p>
+</div>
+</div>
+<!-- Bottom Controls UI -->
+<div class="absolute bottom-12 left-0 right-0 z-20 px-10 flex items-center justify-between">
+<!-- Mini Preview -->
+<div class="w-16 h-16 rounded-xl border-2 border-white/20 bg-primary-container/40 backdrop-blur-sm flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-white/20 text-3xl" data-icon="image">image</span>
+</div>
+<!-- Capture Button -->
+<div class="relative group">
+<div class="absolute inset-0 bg-secondary/30 rounded-full blur-xl scale-125 group-active:scale-100 transition-transform duration-300"></div>
+<button class="relative w-20 h-20 bg-secondary rounded-full flex items-center justify-center shadow-lg active:scale-90 transition-transform duration-200">
+<div class="w-16 h-16 rounded-full border-2 border-on-secondary/40 flex items-center justify-center">
+<div class="w-14 h-14 bg-on-secondary/10 rounded-full"></div>
+</div>
+</button>
+</div>
+<!-- Exit Icon -->
+<button class="w-16 h-16 flex items-center justify-center text-white/80 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-4xl" data-icon="close">close</span>
+</button>
+</div>
+</main>
+<!-- Bottom Nav Suppression Check: This is a task-focused sub-page, so no BottomNavBar is rendered here per the "Destination" rule. -->
+<!-- AI Vision Feature Element (Modo B Context) -->
+<div class="fixed top-20 right-6 z-30 pointer-events-none">
+<div class="bg-tertiary-container/90 backdrop-blur-xl px-3 py-1.5 rounded-lg border border-on-tertiary-container/20 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-on-tertiary-container animate-pulse"></div>
+<span class="font-label text-[10px] uppercase tracking-tighter text-on-tertiary-container font-bold">Modo B Active</span>
+</div>
+</div>
+</body></html>

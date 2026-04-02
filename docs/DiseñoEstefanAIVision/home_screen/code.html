@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-bright": "#fef8f3",
+              "tertiary-fixed": "#7cf6ec",
+              "inverse-surface": "#32302d",
+              "on-secondary-fixed-variant": "#5e4200",
+              "error-container": "#ffdad6",
+              "surface-tint": "#5d5c74",
+              "primary-container": "#1a1a2e",
+              "on-primary": "#ffffff",
+              "secondary": "#7b5806",
+              "secondary-container": "#fdcd75",
+              "on-error": "#ffffff",
+              "on-primary-fixed-variant": "#45455b",
+              "secondary-fixed": "#ffdea6",
+              "tertiary-fixed-dim": "#5dd9d0",
+              "primary-fixed-dim": "#c6c4df",
+              "background": "#fef8f3",
+              "on-secondary-container": "#785503",
+              "on-tertiary-fixed": "#00201e",
+              "on-error-container": "#93000a",
+              "on-primary-fixed": "#1a1a2e",
+              "tertiary-container": "#00201e",
+              "surface-variant": "#e6e2dd",
+              "error": "#ba1a1a",
+              "outline-variant": "#c8c5cd",
+              "surface-dim": "#ded9d4",
+              "outline": "#78767d",
+              "surface-container-low": "#f8f3ee",
+              "primary-fixed": "#e2e0fc",
+              "surface-container-highest": "#e6e2dd",
+              "on-primary-container": "#83829b",
+              "on-secondary": "#ffffff",
+              "on-tertiary-container": "#00948c",
+              "inverse-primary": "#c6c4df",
+              "surface-container": "#f2ede8",
+              "tertiary": "#000000",
+              "on-secondary-fixed": "#271900",
+              "surface-container-high": "#ece7e2",
+              "on-surface": "#1d1b19",
+              "on-background": "#1d1b19",
+              "inverse-on-surface": "#f5f0eb",
+              "surface": "#fef8f3",
+              "surface-container-lowest": "#ffffff",
+              "on-surface-variant": "#47464c",
+              "on-tertiary": "#ffffff",
+              "on-tertiary-fixed-variant": "#00504c",
+              "primary": "#00000b",
+              "secondary-fixed-dim": "#eec069"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .serif-bold { font-family: 'Noto Serif', serif; font-weight: 700; }
+        .serif-italic { font-family: 'Noto Serif', serif; font-style: italic; }
+        .sans-label { font-family: 'Manrope', sans-serif; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body min-h-screen flex flex-col overflow-x-hidden">
+<!-- TopAppBar Shell -->
+<header class="fixed top-0 left-0 w-full z-50 bg-[#fef8f3] dark:bg-[#1a1a2e] backdrop-blur-md bg-opacity-80 flex justify-between items-center px-6 h-16">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full flex items-center justify-center bg-primary-container overflow-hidden">
+<img alt="EA Logo" class="w-6 h-6 object-contain" data-alt="minimalist elegant EA monogram logo in gold on a deep navy circular background with high-end aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqGgCQtByNBz8EwChiGb9OPaYiASefVXKBcEGA6ydaC19fWn2T0FkRjJ4d4sSXt_vBHOMrIgFGcQ_YIXbvohxlFmWsBaPQE7W5F6DZYBR9yHiEuFKkFn755mEmsuHpj6eKPhjRaGgcnfhYgAlQLjB3cdbcmnmHQ-iS8ubsoyDLMdC2ZtM4XRO2ksXvEqDkFbmeHqDDrMXJ4QYrFHEL8Sq0Gi4hIZq8qLsufsd688by2UqGSNLf-vReyvUbHHBcVvzv8bmPeS2kVCc"/>
+</div>
+<h1 class="font-headline text-2xl tracking-tighter text-[#1a1a2e] dark:text-[#fef8f3]">Estefan AI Vision</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#1a1a2e] dark:text-[#fef8f3] hover:opacity-80 transition-opacity active:scale-95 duration-200">logout</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center px-6 pt-20 pb-32">
+<!-- Center Aesthetic Hero Section -->
+<div class="relative flex flex-col items-center">
+<!-- Background Watermark -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03] select-none">
+<span class="font-headline text-[24rem] leading-none">EA</span>
+</div>
+<!-- Central CTA Button -->
+<div class="relative group">
+<!-- Outer Glow/Ring -->
+<div class="absolute -inset-4 bg-secondary/10 rounded-full blur-2xl group-hover:bg-secondary/20 transition-all duration-700"></div>
+<button class="relative w-[180px] h-[180px] rounded-full bg-gradient-to-br from-secondary to-secondary-fixed-dim shadow-[0_20px_50px_rgba(123,88,6,0.2)] flex flex-col items-center justify-center gap-2 text-on-secondary active:scale-95 transition-transform duration-300">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-4xl" data-icon="camera_enhance">camera_enhance</span>
+<span class="material-symbols-outlined text-3xl" data-icon="content_cut">content_cut</span>
+</div>
+<span class="font-headline text-lg font-bold tracking-tight">Nueva consulta</span>
+</button>
+</div>
+<!-- Supporting Text -->
+<div class="mt-10 text-center space-y-2">
+<p class="sans-label text-secondary font-bold tracking-widest">IA Generativa</p>
+<p class="font-headline text-xl text-primary-container/80">Comienza una nueva asesoría con IA</p>
+</div>
+</div>
+<!-- Featured Section Asymmetric Detail -->
+<div class="mt-20 w-full max-w-md">
+<div class="bg-surface-container-low p-8 rounded-3xl relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary/5 rounded-full -mr-16 -mt-16"></div>
+<h3 class="font-headline text-lg italic text-secondary mb-4">El Digital Atelier</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">
+                    Transforma tu estilo con precisión milimétrica. Nuestra tecnología analiza tus facciones para recomendarte el corte perfecto antes de la primera tijerada.
+                </p>
+</div>
+</div>
+</main>
+<!-- Discrete Counter Footer -->
+<footer class="w-full flex justify-center pb-28">
+<div class="flex items-center gap-3 px-6 py-2 bg-surface-container-high rounded-full">
+<span class="w-2 h-2 rounded-full bg-on-tertiary-container animate-pulse"></span>
+<span class="sans-label text-[10px] text-on-surface-variant">8 consultas realizadas hoy</span>
+</div>
+</footer>
+<!-- BottomNavBar Shell -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-8 pb-8 pt-4 bg-[#1a1a2e] dark:bg-[#1a1a2e] rounded-t-[2.5rem] shadow-[0_-8px_32px_rgba(29,27,25,0.05)]">
+<!-- Active Nav: Camera/Home -->
+<a class="flex flex-col items-center justify-center bg-[#7b5806] text-[#fef8f3] rounded-full w-14 h-14 active:scale-90 duration-300 ease-out shadow-lg" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="camera_enhance" style="font-variation-settings: 'FILL' 1;">camera_enhance</span>
+</a>
+<!-- Inactive Nav: History -->
+<a class="flex flex-col items-center justify-center text-[#fef8f3]/50 hover:text-[#7b5806] transition-colors active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="history">history</span>
+<span class="font-sans text-[10px] font-medium mt-1 uppercase tracking-tighter">Historial</span>
+</a>
+<!-- Inactive Nav: Profile -->
+<a class="flex flex-col items-center justify-center text-[#fef8f3]/50 hover:text-[#7b5806] transition-colors active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="person">person</span>
+<span class="font-sans text-[10px] font-medium mt-1 uppercase tracking-tighter">Perfil</span>
+</a>
+</nav>
+</body></html>

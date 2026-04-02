@@ -1,0 +1,24 @@
+{
+  "name": "Estefan AI Vision",
+  "short_name": "AI Vision",
+  "description": "Visualiza tu nuevo look con inteligencia artificial",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#1A1A2E",
+  "background_color": "#F5F0EB",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-fixed-dim": "#eec069",
+              "primary": "#00000b",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-fixed-variant": "#00504c",
+              "on-tertiary": "#ffffff",
+              "on-surface-variant": "#47464c",
+              "surface": "#fef8f3",
+              "on-background": "#1d1b19",
+              "inverse-on-surface": "#f5f0eb",
+              "surface-container-high": "#ece7e2",
+              "on-surface": "#1d1b19",
+              "tertiary": "#000000",
+              "on-secondary-fixed": "#271900",
+              "surface-container": "#f2ede8",
+              "on-tertiary-container": "#00948c",
+              "inverse-primary": "#c6c4df",
+              "on-secondary": "#ffffff",
+              "on-primary-container": "#83829b",
+              "surface-container-low": "#f8f3ee",
+              "primary-fixed": "#e2e0fc",
+              "outline": "#78767d",
+              "surface-container-highest": "#e6e2dd",
+              "surface-variant": "#e6e2dd",
+              "outline-variant": "#c8c5cd",
+              "error": "#ba1a1a",
+              "surface-dim": "#ded9d4",
+              "tertiary-container": "#00201e",
+              "on-primary-fixed": "#1a1a2e",
+              "on-error-container": "#93000a",
+              "on-tertiary-fixed": "#00201e",
+              "background": "#fef8f3",
+              "on-secondary-container": "#785503",
+              "primary-fixed-dim": "#c6c4df",
+              "tertiary-fixed-dim": "#5dd9d0",
+              "secondary-container": "#fdcd75",
+              "on-primary-fixed-variant": "#45455b",
+              "on-error": "#ffffff",
+              "secondary-fixed": "#ffdea6",
+              "secondary": "#7b5806",
+              "on-primary": "#ffffff",
+              "surface-tint": "#5d5c74",
+              "primary-container": "#1a1a2e",
+              "on-secondary-fixed-variant": "#5e4200",
+              "error-container": "#ffdad6",
+              "tertiary-fixed": "#7cf6ec",
+              "inverse-surface": "#32302d",
+              "surface-bright": "#fef8f3"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.tap-highlight-none {
+    -webkit-tap-highlight-color: transparent
+    }
+.bg-noise {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuC0dx_esqvYM38o_g1RI8VSR39GShlBGnk0uo3yiloHCiRd2JyiK6MVTGeWjRN-5MnSZ7GHfVLnJYyxYnBKxO_cyncSuKQukNJZKTvnRcmBl0bguWiLta_OOD-11GdZ0A_-ORl-JpdsUfuHmJAcFSHRPTZyeYLv8d0pQEPEwdEfxWf3UXVxa7kfX41UKDVk9mxZP9xCibJjYlCxgYZAQUqksmGQkEgggB-cPB1ozT8463jVDgNjCR72lfRk3Z_iwRBUEsOvOI2037w)
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface min-h-screen flex flex-col items-center">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#fef8f3] dark:bg-slate-950/80 backdrop-blur-md flex justify-between items-center px-6 h-16 w-full">
+<button class="text-[#1a1a2e] dark:text-slate-100 hover:opacity-80 transition-opacity active:duration-150 scale-95">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-serif italic text-xl tracking-tighter text-[#1a1a2e] dark:text-slate-100 uppercase tracking-widest text-[10px] font-sans">ESTEFAN AI</h1>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-secondary/20">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="close-up portrait of a professional male barber with a well-groomed beard and stylish haircut in a sophisticated studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUeT0F9ypAugH2gjnt3SHW-3BByH0Vb7GXcbSh1PqjEu9kjBclm5TKGvgTaXSA0PKhXK0RvJumjstltfXyHCfNEJyNUf3QVOJfhPaZXuMJ9TMia8rst4JUaznM01Z9UiLv4VJeaq8EWX3dWMTKeISiXX1xWi-YhgpuA3FGhYxVJwnbPh-m1py0ekHheE2TiKdvhxpSaENTl_fpw7hzGDif844EehPDRKlj88KhQRJcgFkqv5j7WBM51bcJTR1QVdXURoDsZSZe618"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="mt-20 mb-28 w-full max-w-2xl px-6 flex flex-col items-center">
+<!-- Header Section -->
+<div class="text-center mb-10 space-y-2">
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-secondary font-bold">Estefan AI Vision</span>
+<h2 class="font-headline text-4xl md:text-5xl text-primary-container tracking-tight">Comparte tu nueva visión</h2>
+</div>
+<!-- Central Bento Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 w-full">
+<!-- QR Code Card (Focus) -->
+<div class="md:col-span-7 bg-surface-container-low rounded-xl p-8 flex flex-col items-center justify-center relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-5">
+<span class="font-headline text-8xl font-bold text-primary">EA</span>
+</div>
+<!-- QR Frame -->
+<div class="relative p-4 bg-white rounded-2xl shadow-sm border-[3px] border-secondary/20">
+<div class="absolute -top-1 -left-1 w-6 h-6 border-t-4 border-l-4 border-secondary rounded-tl-lg"></div>
+<div class="absolute -top-1 -right-1 w-6 h-6 border-t-4 border-r-4 border-secondary rounded-tr-lg"></div>
+<div class="absolute -bottom-1 -left-1 w-6 h-6 border-b-4 border-l-4 border-secondary rounded-bl-lg"></div>
+<div class="absolute -bottom-1 -right-1 w-6 h-6 border-b-4 border-r-4 border-secondary rounded-br-lg"></div>
+<img alt="QR Results" class="w-48 h-48 grayscale brightness-90" data-alt="minimalist and elegant large QR code on a clean white background for a luxury digital brand" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHU7odJoZpSIyD9_SUuh_yLn2ivi_x8sXrC2exCNDFg9MWaYUnFm7xEOyhRqxqTbORUzTnmkZqWZ07VF_S7XGgl42Y4-i0s29uvRjXWerRG_xRPc_9CRA8e0hS1u8ETOnDXhg2GQbArSjsLrtt4aH31oOg0FiMxtiaoUloFqWByarjP3-IZebnZK8x8Ir0vXRvPVciPvNS-cTfhm6TRvfzmBjqFvpT21kcviiaA_xqODFWQPPDXNzqeBIYEpDcEtV-p6JqGz0AvsQ"/>
+</div>
+<p class="mt-8 font-label text-sm text-center text-on-surface-variant max-w-[220px]">
+                    Escanea para descargar tu collage personalizado
+                </p>
+</div>
+<!-- Preview Card -->
+<div class="md:col-span-5 flex flex-col gap-6">
+<div class="bg-primary-container rounded-xl p-6 text-white h-full flex flex-col justify-between overflow-hidden relative">
+<div class="relative z-10">
+<p class="font-label text-[10px] uppercase tracking-widest text-secondary-fixed-dim mb-4">Vista Previa</p>
+<div class="aspect-[4/5] rounded-lg overflow-hidden border border-white/10 shadow-2xl rotate-2 group-hover:rotate-0 transition-transform duration-500">
+<img alt="Collage Preview" class="w-full h-full object-cover" data-alt="editorial style collage of male hairstyles and grooming products with aesthetic golden accents and typography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnteBigsk3TSdZ2sjXsa4n6yrGjCtaoTg8T4jJ-mHC4W3TU7rnQRIBWh2TaAMdtNukAAxTgGE5KYbJ4srUocPd4wN4GPKVJdxIz9GFTyLsOlQo6kNJZVAfeJSapgIA97HqB-jiUgz_WrxAPGhQ672WefyvXwW6Obn27ryjXlzT6PN79Ex9j-QgWIaFZ-Q4voDpM-MOLtvb0LfKQGbP_-mwASo5a5K8TyibAvr92B7SDukZA9RpVRvzgKLVXfCUH1LIJ7mtjSzNP-I"/>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2 opacity-60">
+<span class="font-headline italic text-lg tracking-tighter">EA</span>
+<div class="h-[1px] flex-1 bg-white/20"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="mt-12 w-full flex flex-col gap-4">
+<button class="w-full bg-secondary text-on-secondary font-bold py-4 px-8 rounded-xl flex items-center justify-center gap-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.3)] hover:opacity-90 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+<span class="font-label tracking-wide uppercase text-sm">Descargar en este dispositivo</span>
+</button>
+<button class="w-full bg-primary-container text-white py-4 px-8 rounded-xl font-medium hover:bg-primary-container/90 active:scale-[0.98] transition-all">
+<span class="font-label tracking-wide uppercase text-sm">Finalizar consulta</span>
+</button>
+</div>
+<!-- AI Insights Tag -->
+<div class="mt-8 flex items-center gap-2 text-on-tertiary-container/60">
+<span class="material-symbols-outlined text-[18px]" data-icon="auto_awesome">auto_awesome</span>
+<p class="text-xs font-label italic">Procesado por el motor de visión Estefan AI</p>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 px-4 pb-2 bg-[#1a1a2e] dark:bg-slate-900 rounded-t-3xl shadow-[0_-8px_32px_rgba(29,27,25,0.05)]">
+<a class="flex flex-col items-center justify-center text-slate-400 hover:text-white transition-colors tap-highlight-none active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="content_cut">content_cut</span>
+<span class="font-sans text-[11px] font-medium tracking-wide">Atelier</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 hover:text-white transition-colors tap-highlight-none active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-sans text-[11px] font-medium tracking-wide">Modo B</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#7b5806] bg-white/10 rounded-xl px-4 py-1 transition-colors tap-highlight-none active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-sans text-[11px] font-medium tracking-wide">History</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 hover:text-white transition-colors tap-highlight-none active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-sans text-[11px] font-medium tracking-wide">Profile</span>
+</a>
+</nav>
+</body></html>

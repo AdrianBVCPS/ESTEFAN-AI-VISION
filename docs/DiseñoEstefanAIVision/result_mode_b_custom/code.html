@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-bright": "#fef8f3",
+                        "tertiary-fixed": "#7cf6ec",
+                        "inverse-surface": "#32302d",
+                        "on-secondary-fixed-variant": "#5e4200",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#5d5c74",
+                        "primary-container": "#1a1a2e",
+                        "on-primary": "#ffffff",
+                        "secondary": "#7b5806",
+                        "secondary-container": "#fdcd75",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#45455b",
+                        "secondary-fixed": "#ffdea6",
+                        "tertiary-fixed-dim": "#5dd9d0",
+                        "primary-fixed-dim": "#c6c4df",
+                        "background": "#fef8f3",
+                        "on-secondary-container": "#785503",
+                        "on-tertiary-fixed": "#00201e",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#1a1a2e",
+                        "tertiary-container": "#00201e",
+                        "surface-variant": "#e6e2dd",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c8c5cd",
+                        "surface-dim": "#ded9d4",
+                        "outline": "#78767d",
+                        "surface-container-low": "#f8f3ee",
+                        "primary-fixed": "#e2e0fc",
+                        "surface-container-highest": "#e6e2dd",
+                        "on-primary-container": "#83829b",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#00948c",
+                        "inverse-primary": "#c6c4df",
+                        "surface-container": "#f2ede8",
+                        "tertiary": "#000000",
+                        "on-secondary-fixed": "#271900",
+                        "surface-container-high": "#ece7e2",
+                        "on-surface": "#1d1b19",
+                        "on-background": "#1d1b19",
+                        "inverse-on-surface": "#f5f0eb",
+                        "surface": "#fef8f3",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#47464c",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#00504c",
+                        "primary": "#00000b",
+                        "secondary-fixed-dim": "#eec069"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Serif"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ea-glass {
+            background: rgba(26, 26, 46, 0.8);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body text-on-surface antialiased min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-[#fef8f3] bg-opacity-80 backdrop-blur-md flex justify-between items-center w-full px-6 h-16 transition-opacity hover:opacity-80">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center">
+<img alt="EA Logo" class="w-5 h-5 object-contain" data-alt="minimalist circular logo with a gold EA monogram on a deep navy background professional branding" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSqOo_fbIr6Hj_uz9dsJ4I_rFCvRGBI10xxNFewFT4vokScaQxJdobRWHfsxzCMLE-aqSodexl0FXuktD4NOoTx0anKCxS8deKFWiwceNa8yTdc0DSB7v0oLtZBjTt2eXdUwFgEH3Bt1roLacL6gWCZuryK5Z7HDCvNO3N73TJEfQo3dJeLLMyIqPmhx2hBsEuMVYA0gRCHXEKmrIMFIdva2UKsFqtWowcixtVWm6p3cP3iOOV44Bh1pXk537SfelAqopPX6N6Pnw"/>
+</div>
+<h1 class="font-headline italic text-xl text-[#7b5806] tracking-tighter">Estefan AI Vision</h1>
+</div>
+<button class="text-[#1a1a2e] active:scale-95 duration-200">
+<span class="material-symbols-outlined">logout</span>
+</button>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-2xl mx-auto">
+<!-- Content Strategy: Editorial Layout -->
+<section class="mb-12">
+<div class="flex flex-col items-center">
+<span class="font-label uppercase tracking-widest text-[10px] text-secondary mb-2">Modo B / AI Simulation</span>
+<h2 class="font-headline text-4xl text-center leading-tight mb-8">Tu Visión Digital</h2>
+<!-- Main Image Canvas -->
+<div class="relative w-full aspect-[16/9] rounded-xl overflow-hidden shadow-2xl bg-surface-container-high group">
+<img alt="Modern Mullet Composition" class="w-full h-full object-cover" data-alt="cinematic 16:9 triptych showing a professional modern mullet haircut from front, side, and back views with high-end studio lighting and soft cream background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMkF3-S59JSjFOAnyWwY2oblCyn0h9xXpUJLFx0KETsWBs9Dt56KyVlOaEjIQ805mhFV6dTS6mWxu3u7Tkod37iLxrvDfcZIPkxTNEE3l9mW3WSHBbD4aAPVLXha_fLKPss68GPGjLPtZ-ni9ZmX8wUyyXXxPNFAXLkJpykUiswF5dWTNgZIyPA-wBVdUAL_bDJMdK9FNs3_olXWxKADt92LkxN0eWXxTHWbKsqMAUXRE40FSdMJwwd9LbaLG38q8lO_XBuD4eUAQ"/>
+<!-- AI Status Overlay -->
+<div class="absolute top-4 right-4 ea-glass px-3 py-1.5 rounded-full flex items-center gap-2 border border-tertiary-fixed-dim/20">
+<span class="w-2 h-2 rounded-full bg-on-tertiary-container animate-pulse"></span>
+<span class="font-label text-[10px] text-white tracking-wider">AI RENDER ACTIVE</span>
+</div>
+</div>
+<!-- Text Chip -->
+<div class="mt-6 inline-flex items-center gap-2 bg-surface-container-lowest px-6 py-2 rounded-full shadow-sm border border-outline-variant/15">
+<span class="material-symbols-outlined text-secondary text-lg" style="font-variation-settings: 'FILL' 1;">content_cut</span>
+<p class="font-body text-sm font-semibold tracking-tight text-on-surface">Modern mullet con degradado bajo</p>
+</div>
+</div>
+</section>
+<!-- Actions Cluster -->
+<section class="space-y-4">
+<!-- Primary Action: Teal Success State -->
+<button class="w-full bg-on-tertiary-container hover:opacity-90 text-white font-body font-bold py-5 rounded-xl transition-all active:scale-[0.98] shadow-lg shadow-on-tertiary-container/20 flex items-center justify-center gap-3">
+<span class="material-symbols-outlined">auto_fix_high</span>
+                Probar otro corte
+            </button>
+<div class="grid grid-cols-2 gap-4">
+<!-- Secondary: Outline Gold -->
+<button class="flex items-center justify-center gap-2 border-2 border-secondary/30 text-secondary hover:bg-secondary/5 font-body font-bold py-4 rounded-xl transition-colors active:scale-[0.98]">
+<span class="material-symbols-outlined text-xl">download</span>
+                    Descargar
+                </button>
+<!-- Secondary: AI Suggestion -->
+<button class="flex items-center justify-center gap-2 border-2 border-primary-container/10 text-primary-container hover:bg-primary-container/5 font-body font-bold py-4 rounded-xl transition-colors active:scale-[0.98]">
+<span class="material-symbols-outlined text-xl">psychology</span>
+                    IA Sugiera
+                </button>
+</div>
+</section>
+<!-- Bottom Footer Navigation -->
+<footer class="mt-16 text-center">
+<button class="group inline-flex flex-col items-center gap-1 opacity-60 hover:opacity-100 transition-opacity">
+<span class="font-label uppercase tracking-[0.2em] text-[10px] text-on-surface">Nueva consulta</span>
+<div class="h-0.5 w-4 bg-secondary rounded-full group-hover:w-12 transition-all duration-300"></div>
+</button>
+</footer>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-[#1a1a2e] rounded-t-3xl shadow-[0_-8px_32px_rgba(29,27,25,0.05)] flex justify-around items-center px-8 pb-6 pt-4">
+<!-- History Tab (Inactive) -->
+<button class="flex flex-col items-center justify-center text-white/50 transition-colors hover:text-[#7b5806]">
+<span class="material-symbols-outlined text-2xl">history</span>
+<span class="font-sans text-[10px] font-medium mt-1">History</span>
+</button>
+<!-- Camera Tab (Active) -->
+<button class="flex flex-col items-center justify-center bg-[#7b5806] text-[#fef8f3] rounded-full w-12 h-12 scale-110 shadow-xl shadow-secondary/20 transition-transform active:scale-90 duration-300 ease-out">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">camera_enhance</span>
+</button>
+<!-- Profile Tab (Inactive) -->
+<button class="flex flex-col items-center justify-center text-white/50 transition-colors hover:text-[#7b5806]">
+<span class="material-symbols-outlined text-2xl">person</span>
+<span class="font-sans text-[10px] font-medium mt-1">Profile</span>
+</button>
+</nav>
+<!-- Watermark Brand Identity -->
+<div class="fixed bottom-32 right-0 pointer-events-none opacity-5 -mr-12">
+<span class="font-headline text-[180px] italic select-none">EA</span>
+</div>
+</body></html>

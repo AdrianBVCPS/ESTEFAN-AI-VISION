@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-bright": "#fef8f3",
+              "tertiary-fixed": "#7cf6ec",
+              "inverse-surface": "#32302d",
+              "on-secondary-fixed-variant": "#5e4200",
+              "error-container": "#ffdad6",
+              "surface-tint": "#5d5c74",
+              "primary-container": "#1a1a2e",
+              "on-primary": "#ffffff",
+              "secondary": "#7b5806",
+              "secondary-container": "#fdcd75",
+              "on-error": "#ffffff",
+              "on-primary-fixed-variant": "#45455b",
+              "secondary-fixed": "#ffdea6",
+              "tertiary-fixed-dim": "#5dd9d0",
+              "primary-fixed-dim": "#c6c4df",
+              "background": "#fef8f3",
+              "on-secondary-container": "#785503",
+              "on-tertiary-fixed": "#00201e",
+              "on-error-container": "#93000a",
+              "on-primary-fixed": "#1a1a2e",
+              "tertiary-container": "#00201e",
+              "surface-variant": "#e6e2dd",
+              "error": "#ba1a1a",
+              "outline-variant": "#c8c5cd",
+              "surface-dim": "#ded9d4",
+              "outline": "#78767d",
+              "surface-container-low": "#f8f3ee",
+              "primary-fixed": "#e2e0fc",
+              "surface-container-highest": "#e6e2dd",
+              "on-primary-container": "#83829b",
+              "on-secondary": "#ffffff",
+              "on-tertiary-container": "#00948c",
+              "inverse-primary": "#c6c4df",
+              "surface-container": "#f2ede8",
+              "tertiary": "#000000",
+              "on-secondary-fixed": "#271900",
+              "surface-container-high": "#ece7e2",
+              "on-surface": "#1d1b19",
+              "on-background": "#1d1b19",
+              "inverse-on-surface": "#f5f0eb",
+              "surface": "#fef8f3",
+              "surface-container-lowest": "#ffffff",
+              "on-surface-variant": "#47464c",
+              "on-tertiary": "#ffffff",
+              "on-tertiary-fixed-variant": "#00504c",
+              "primary": "#00000b",
+              "secondary-fixed-dim": "#eec069"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .ea-monogram-watermark {
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+            opacity: 0.05;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-[#fef8f3] dark:bg-[#1a1a2e] text-[#1a1a2e] dark:text-[#fef8f3] docked full-width top-0 backdrop-blur-md bg-opacity-80 flex justify-between items-center w-full px-6 h-16 sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-secondary border border-secondary/20">
+<span class="font-headline italic text-sm">EA</span>
+</div>
+<h1 class="font-headline text-2xl tracking-tighter">Estefan AI Vision</h1>
+</div>
+<button class="hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined text-2xl">logout</span>
+</button>
+</header>
+<main class="flex-1 px-6 pt-8 pb-32 max-w-2xl mx-auto w-full relative">
+<!-- Logo Watermark Background -->
+<div class="fixed inset-0 pointer-events-none flex items-center justify-center overflow-hidden z-0">
+<span class="font-headline italic text-[40rem] text-secondary ea-monogram-watermark select-none">EA</span>
+</div>
+<div class="relative z-10">
+<!-- Header Section -->
+<div class="mb-10 text-center">
+<span class="font-label uppercase tracking-widest text-xs text-secondary mb-2 block">Selección de IA</span>
+<h2 class="font-headline text-4xl text-primary-container leading-tight">Elige cómo quieres usar la IA</h2>
+</div>
+<!-- Mode Selector Grid -->
+<div class="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
+<!-- Mode A: Suggestion -->
+<button class="group relative flex flex-col items-start p-8 rounded-xl bg-surface-container-lowest transition-all duration-300 hover:translate-y-[-4px] active:scale-[0.98] text-left overflow-hidden">
+<!-- High-end gradient border simulation -->
+<div class="absolute inset-0 border border-secondary/10 group-hover:border-secondary/30 rounded-xl pointer-events-none"></div>
+<div class="w-14 h-14 mb-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-3xl" data-icon="psychology">psychology</span>
+</div>
+<h3 class="font-headline text-2xl text-primary-container mb-3">La IA sugiere</h3>
+<p class="text-on-surface-variant leading-relaxed text-sm mb-6">
+                        Analizo el rostro y propongo 2 peinados ideales adaptados a tu estructura facial.
+                    </p>
+<div class="mt-auto flex items-center text-secondary font-semibold text-xs uppercase tracking-widest">
+<span>Iniciar análisis</span>
+<span class="material-symbols-outlined ml-2 text-sm">arrow_forward</span>
+</div>
+</button>
+<!-- Mode B: Try-on -->
+<button class="group relative flex flex-col items-start p-8 rounded-xl bg-primary-container transition-all duration-300 hover:translate-y-[-4px] active:scale-[0.98] text-left overflow-hidden">
+<div class="w-14 h-14 mb-8 rounded-full bg-on-tertiary-container/20 flex items-center justify-center text-on-tertiary-container">
+<span class="material-symbols-outlined text-3xl" data-icon="keyboard" style="font-variation-settings: 'FILL' 1;">keyboard</span>
+</div>
+<h3 class="font-headline text-2xl text-surface-bright mb-3">Probar un corte</h3>
+<p class="text-surface-variant/70 leading-relaxed text-sm mb-6">
+                        Escribe un peinado y te muestro cómo quedaría usando nuestra tecnología Modo B.
+                    </p>
+<div class="mt-auto flex items-center text-on-tertiary-container font-semibold text-xs uppercase tracking-widest">
+<span>Modo B Activo</span>
+<span class="material-symbols-outlined ml-2 text-sm">auto_awesome</span>
+</div>
+</button>
+</div>
+</div>
+</main>
+<!-- Bottom Thumbnail Strip & Navigation Shell -->
+<div class="fixed bottom-0 left-0 w-full z-40">
+<!-- Thumbnail Strip -->
+<div class="bg-surface/90 backdrop-blur-md px-6 py-4 flex justify-center gap-4 border-t border-surface-variant/30">
+<div class="relative group">
+<img alt="Captura lateral" class="w-16 h-16 rounded-lg object-cover ring-2 ring-secondary ring-offset-2 ring-offset-surface" data-alt="Close-up profile shot of a man with sharp haircut in professional studio lighting, warm tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEIwIQFtvV7YEtm4U3qy6p6FvF4ATrwi3EAsiWdnDh6AQfPo6-wyYCK9iXtPm-evElK5WJeV5lqYI13GHDeOWIEMNoIcl-oS7j8BYQsXWTkvIBRxRnjsncgqCAtb4zDvjfojZ3UYrLcASypfffKO625ZQhH9FgAY6g5HwL8NYsYhwo-TaVk4UyeVfkc25TA26uBOag8F1Fxv0q2xWdqZhM7bjadgwE-AWKHMm8ZFdEIA6XYKbMRPsY8jj60LsnEmJlhg7TLuHKteU"/>
+<div class="absolute inset-0 flex items-center justify-center bg-primary-container/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white text-xs">visibility</span>
+</div>
+</div>
+<div class="relative group">
+<img alt="Captura frontal" class="w-16 h-16 rounded-lg object-cover grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" data-alt="Frontal portrait of a man looking at camera in a classic barbershop setting with soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6bXlLIpnQDa7b_-Rc9rm9XK8DaNaRvbrsBK5rZjZ-B3TzLjLwkV2n_l1PbQmNhG20rvC1zDUJB193a1HWoeYgPhEqVmD0ObgD59MRP6azgrp6szbLa-Ufeb5nW6i3e7P_PmAehs1c1d0i0hDkCsApbUX47Ljh9tik89EY24dhV8l_GS2ewpEQP3POVv62PujQdhHy3bFLVFXfG1G6gxcPwcgHKF9bbDY3T0jp-OE9v___C7PmS2_gpfTrXGg_0Dv1sXwzfJe4TAk"/>
+</div>
+<div class="relative group">
+<img alt="Captura superior" class="w-16 h-16 rounded-lg object-cover grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" data-alt="Bird eye view of hair texture and crown area of a man, professional salon lighting with focus on detail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBplEuXhvbsjY1ZJg1eU4QCOqSZEhG6MJVhSgncn9Sp3qn18tuiiU92bol4ZgklfTQXY4Rmn8KLtPlUheLJZWPx7cGOjNcErY5aQJOfIXNU2UQ4OmnXGoZVoDBBnbMTiRXpRX1rj9jBOdfkixeMggW58LQQnEBnIWA3lV-GIWxJZdxgY-tat0YmlWq8vA2UQRWtu7Q0H6CD0j-IPGUXzI-sMwUAICeoJWPLZ8swDZ9C9GxG3vfCUuDGS73mx-P8BX9ul4QPwF_8HbQ"/>
+</div>
+</div>
+<!-- BottomNavBar -->
+<nav class="bg-[#1a1a2e] dark:bg-[#1a1a2e] docked full-width bottom-0 rounded-t-3xl shadow-[0_-8px_32px_rgba(29,27,25,0.05)] fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-8 pb-6 pt-4">
+<button class="flex flex-col items-center justify-center bg-[#7b5806] text-[#fef8f3] rounded-full w-12 h-12 active:scale-90 duration-300 ease-out">
+<span class="material-symbols-outlined" data-icon="camera_enhance" style="font-variation-settings: 'FILL' 1;">camera_enhance</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#fef8f3]/50 hover:text-[#7b5806] transition-colors active:scale-90 duration-300 ease-out">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#fef8f3]/50 hover:text-[#7b5806] transition-colors active:scale-90 duration-300 ease-out">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+</nav>
+</div>
+</body></html>

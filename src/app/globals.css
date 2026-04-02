@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+:root {
+  /* Aureum Precision — tokens de color */
+  --color-background: #F5F0EB;
+  --color-surface: #FAF7F4;
+  --color-navy: #1A1A2E;
+  --color-gold: #D4A854;
+  --color-teal: #4ECDC4;
+  --color-text-primary: #1C1C1C;
+  --color-text-secondary: #6B7280;
+  --color-error: #E74C3C;
+  --color-dark-surface: #2D2D3A;
+
+  /* Fuentes — variables CSS asignadas por next/font */
+  --font-display: var(--font-playfair-display);
+  --font-ui: var(--font-dm-sans);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+@theme inline {
+  --color-background: var(--color-background);
+  --color-surface: var(--color-surface);
+  --color-navy: var(--color-navy);
+  --color-gold: var(--color-gold);
+  --color-teal: var(--color-teal);
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-error: var(--color-error);
+  --color-dark-surface: var(--color-dark-surface);
+
+  --font-display: var(--font-display);
+  --font-ui: var(--font-ui);
+  --font-mono: var(--font-mono);
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-text-primary);
+  font-family: var(--font-ui), system-ui, sans-serif;
+}
