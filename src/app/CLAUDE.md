@@ -33,3 +33,8 @@ src/app/
 - Metadata: title dinámico por página, theme-color `#1A1A2E`.
 - Loading states: skeleton/spinner en cada página que haga fetch. Nunca pantalla en blanco.
 - Transiciones entre páginas: slide horizontal suave (300ms ease-out).
+
+## Gotchas frecuentes
+
+- **Tailwind v4:** Los estilos globales (html, body, *, etc.) deben estar dentro de `@layer base` en `globals.css`. Sin el layer, la especificidad es incorrecta.
+- **Viewport:** Usar `maximumScale: 5` en lugar de `userScalable: false`. El segundo viola WCAG 1.4.4 (accesibilidad de zoom).

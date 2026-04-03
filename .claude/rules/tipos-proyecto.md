@@ -4,6 +4,8 @@
 
 - Identidad visual BV obligatoria: ver @docs/sistema-diseno-bv.md
 - PWA obligatoria (manifest.json, service worker, iconos 192/512)
+  - Manifest: iconos `any` y `maskable` como entradas **separadas** (no `"purpose": "any maskable"`)
+  - Iconos: generar desde fuente ≥1024px para calidad correcta
 - Supabase con RLS estricto por roles
 - Layout BV: header navy + banda roja + sidebar + contenido
 - Footer: "Bureau Veritas CPS — Laboratorio Textil de Lugo"
