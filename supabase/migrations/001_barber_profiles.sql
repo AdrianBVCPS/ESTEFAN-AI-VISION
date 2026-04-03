@@ -38,7 +38,9 @@ BEGIN
   NEW.updated_at = now();
   RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql
+   SECURITY DEFINER
+   SET search_path = public;
 
 CREATE TRIGGER barber_profiles_updated_at
   BEFORE UPDATE ON public.barber_profiles

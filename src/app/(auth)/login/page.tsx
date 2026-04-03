@@ -15,6 +15,8 @@ export default function LoginPage() {
     e.preventDefault()
     setError(null)
     const formData = new FormData(e.currentTarget)
+    // keepSession se pasa como checkbox — 'on' si marcado, ausente si no
+    if (!keepSession) formData.delete('keepSession')
 
     startTransition(async () => {
       const result = await loginAction(formData)
@@ -70,14 +72,7 @@ export default function LoginPage() {
             autoComplete="email"
             required
             disabled={isPending}
-            className="w-full h-14 px-4 rounded-lg font-ui text-sm outline-none transition-all disabled:opacity-50"
-            style={{
-              background: 'rgba(255,255,255,0.07)',
-              color: '#F5F0EB',
-              border: '1.5px solid transparent',
-            }}
-            onFocus={e => (e.currentTarget.style.borderColor = '#D4A854')}
-            onBlur={e => (e.currentTarget.style.borderColor = 'transparent')}
+            className="login-input w-full h-14 px-4 rounded-lg font-ui text-sm outline-none transition-all disabled:opacity-50"
           />
         </div>
 
@@ -98,14 +93,7 @@ export default function LoginPage() {
               autoComplete="current-password"
               required
               disabled={isPending}
-              className="w-full h-14 px-4 pr-12 rounded-lg font-ui text-sm outline-none transition-all disabled:opacity-50"
-              style={{
-                background: 'rgba(255,255,255,0.07)',
-                color: '#F5F0EB',
-                border: '1.5px solid transparent',
-              }}
-              onFocus={e => (e.currentTarget.style.borderColor = '#D4A854')}
-              onBlur={e => (e.currentTarget.style.borderColor = 'transparent')}
+              className="login-input w-full h-14 px-4 pr-12 rounded-lg font-ui text-sm outline-none transition-all disabled:opacity-50"
             />
             <button
               type="button"
@@ -133,9 +121,13 @@ export default function LoginPage() {
           </span>
         </label>
 
-        {/* Error */}
+        {/* Error — role="alert" para lectores de pantalla */}
         {error && (
-          <p className="font-ui text-sm text-center px-3 py-2 rounded-lg" style={{ color: '#E74C3C', background: 'rgba(231,76,60,0.1)' }}>
+          <p
+            role="alert"
+            className="font-ui text-sm text-center px-3 py-2 rounded-lg"
+            style={{ color: '#E74C3C', background: 'rgba(231,76,60,0.1)' }}
+          >
             {error}
           </p>
         )}

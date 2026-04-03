@@ -1,7 +1,6 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { logoutAction } from '@/app/(auth)/login/actions'
-import type { BarberProfile } from '@/types/database'
 import { LogOut } from 'lucide-react'
 
 export default async function ProtectedLayout({
@@ -16,12 +15,14 @@ export default async function ProtectedLayout({
     redirect('/login')
   }
 
-  // Carga el perfil del barbero
-  const { data: profile } = await supabase
+  // Carga solo display_name del barbero para el header
+  const { data } = await supabase
     .from('barber_profiles')
-    .select('*')
+    .select('display_name')
     .eq('id', user.id)
-    .maybeSingle() as { data: BarberProfile | null, error: unknown }
+    .maybeSingle()
+
+  const displayName = (data as { display_name: string } | null)?.display_name ?? null
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -30,9 +31,9 @@ export default async function ProtectedLayout({
           Estefan AI Vision
         </span>
         <div className="flex items-center gap-4">
-          {profile && (
+          {displayName && (
             <span className="font-ui text-sm hidden sm:block" style={{ color: '#9CA3AF' }}>
-              {profile.display_name}
+              {displayName}
             </span>
           )}
           <form action={logoutAction}>

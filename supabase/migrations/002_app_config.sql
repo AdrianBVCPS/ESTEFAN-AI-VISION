@@ -13,8 +13,9 @@ CREATE TABLE public.app_config (
 ALTER TABLE public.app_config ENABLE ROW LEVEL SECURITY;
 
 -- Cualquier usuario autenticado puede leer la configuración
+-- Nota: auth.role() está deprecado — usar auth.uid() IS NOT NULL
 CREATE POLICY "authenticated_select" ON public.app_config
-  FOR SELECT USING (auth.role() = 'authenticated');
+  FOR SELECT USING (auth.uid() IS NOT NULL);
 
 -- Solo admin puede modificar la configuración
 CREATE POLICY "admin_update" ON public.app_config

@@ -2,7 +2,11 @@ import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import type { Database } from '@/types/database'
 
-export async function createClient() {
+/**
+ * Cliente Supabase para contexto de servidor (Server Components, Server Actions, Route Handlers).
+ * @param persistent - Si es false, las cookies de sesión expiran al cerrar el navegador.
+ */
+export async function createClient(persistent = true) {
   const cookieStore = await cookies()
 
   return createServerClient<Database>(
@@ -15,11 +19,15 @@ export async function createClient() {
         },
         setAll(cookiesToSet) {
           try {
-            cookiesToSet.forEach(({ name, value, options }) =>
-              cookieStore.set(name, value, options)
-            )
+            cookiesToSet.forEach(({ name, value, options }) => {
+              // Si el usuario no marcó "mantener sesión", omitir maxAge → cookie de sesión
+              const cookieOptions = persistent
+                ? options
+                : { ...options, maxAge: undefined }
+              cookieStore.set(name, value, cookieOptions)
+            })
           } catch {
-            // En Server Components las cookies las gestiona el middleware
+            // En Server Components las cookies las gestiona el proxy
           }
         },
       },

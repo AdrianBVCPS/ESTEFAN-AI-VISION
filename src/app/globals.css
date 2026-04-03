@@ -45,3 +45,17 @@
     font-family: var(--font-ui), system-ui, sans-serif;
   }
 }
+
+@layer components {
+  /* Input de login — fondo semi-transparente con borde dorado al foco */
+  .login-input {
+    background: rgba(255, 255, 255, 0.07);
+    color: #F5F0EB;
+    border: 1.5px solid transparent;
+    transition: border-color 150ms ease;
+  }
+
+  .login-input:focus {
+    border-color: #D4A854;
+  }
+}
