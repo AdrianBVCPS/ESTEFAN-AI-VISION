@@ -2,7 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { GoogleGenAI } from '@google/genai'
 import { generateRequestSchema } from '@/lib/validations/schemas'
 import { buildGeneratePromptModeA, buildGeneratePromptModeB } from '@/lib/gemini/prompts'
+import { checkAndIncrementUsage } from '@/lib/gemini/rate-limit'
 
+// gemini-3.1-flash-image-preview: Nano Banana 2 — mejor consistencia de personaje
 const MODEL_GENERATE = 'gemini-3.1-flash-image-preview'
 
 export async function POST(request: NextRequest) {
@@ -26,13 +28,20 @@ export async function POST(request: NextRequest) {
     )
   }
 
+  // Rate limiting — la generación de imagen es la operación más costosa
+  const usageOk = await checkAndIncrementUsage()
+  if (!usageOk) {
+    return NextResponse.json(
+      { error: 'Has alcanzado el límite diario de consultas. Inténtalo mañana.' },
+      { status: 429 }
+    )
+  }
+
   const ai = new GoogleGenAI({ apiKey })
   const { photos, prompt, title, promptMode } = parsed.data
 
-  // Modo A: el visualPrompt ya viene formateado desde el análisis
-  // Modo B: envolver la descripción libre del barbero con instrucciones técnicas
   const finalPrompt = promptMode === 'preformed'
-    ? buildGeneratePromptModeA(prompt, title)
+    ? buildGeneratePromptModeA(prompt)
     : buildGeneratePromptModeB({ photos, prompt, title })
 
   const imageParts = photos.map(base64 => ({
@@ -62,8 +71,6 @@ export async function POST(request: NextRequest) {
     const imagePartResult = parts.find(p => p.inlineData?.mimeType?.startsWith('image/'))
 
     if (!imagePartResult?.inlineData) {
-      const textResponse = parts.find(p => p.text)?.text
-      console.error('[/api/gemini/generate] Sin imagen. Texto:', textResponse?.slice(0, 200))
       throw new Error('Gemini no devolvió imagen')
     }
 
@@ -74,9 +81,10 @@ export async function POST(request: NextRequest) {
     })
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Error desconocido'
-    console.error('[/api/gemini/generate] Error:', message)
     return NextResponse.json(
-      { error: 'La IA está ocupada, inténtalo de nuevo en unos segundos.' },
+      { error: message === 'Gemini no devolvió imagen'
+          ? 'La IA no pudo generar la imagen. Inténtalo de nuevo.'
+          : 'La IA está ocupada, inténtalo de nuevo en unos segundos.' },
       { status: 502 }
     )
   }

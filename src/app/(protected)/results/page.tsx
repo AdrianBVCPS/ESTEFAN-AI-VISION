@@ -25,7 +25,7 @@ export default function ResultsPage() {
     const a = document.createElement('a')
     a.href = image.url
     const fecha = new Date().toISOString().slice(0, 16).replace('T', '-').replace(':', '')
-    const nombreArchivo = `estefan-ai-${title.toLowerCase().replace(/\s+/g, '-')}-${fecha}.jpg`
+    const nombreArchivo = `estefan-ai-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${fecha}.jpg`
     a.download = nombreArchivo
     a.click()
   }

@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { GoogleGenAI } from '@google/genai'
-import { analyzeRequestSchema } from '@/lib/validations/schemas'
+import { analyzeRequestSchema, geminiAnalysisResponseSchema } from '@/lib/validations/schemas'
 import { buildAnalyzePrompt, ANALYZE_SYSTEM_INSTRUCTION } from '@/lib/gemini/prompts'
 import { checkAndIncrementUsage } from '@/lib/gemini/rate-limit'
-import type { GeminiAnalysisResponse } from '@/lib/gemini/types'
 
-const MODEL_ANALYZE = 'gemini-2.0-flash'
+// gemini-2.5-flash-lite: modelo de texto más económico, ideal para análisis JSON
+const MODEL_ANALYZE = 'gemini-2.5-flash-lite'
 
 export async function POST(request: NextRequest) {
   // 1. Validar que la API key esté configurada
@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
     )
   }
 
-  // 3. Rate limiting diario
+  // 3. Rate limiting diario (atómico via RPC)
   const usageOk = await checkAndIncrementUsage()
   if (!usageOk) {
     return NextResponse.json(
@@ -67,6 +67,7 @@ export async function POST(request: NextRequest) {
         temperature: 0.15,
         topP: 0.8,
         topK: 20,
+        maxOutputTokens: 2048,
       },
     })
 
@@ -75,19 +76,26 @@ export async function POST(request: NextRequest) {
       throw new Error('Respuesta vacía de Gemini')
     }
 
-    const result = JSON.parse(text) as GeminiAnalysisResponse
-
-    // Validación básica de estructura
-    if (!result.faceShape || !Array.isArray(result.recommendations) || result.recommendations.length < 2) {
-      throw new Error('Estructura de respuesta inválida')
+    // Parsear y validar estructura completa con Zod
+    let parsed: unknown
+    try {
+      parsed = JSON.parse(text)
+    } catch {
+      throw new Error('La IA devolvió JSON malformado')
     }
 
-    return NextResponse.json(result)
+    const validation = geminiAnalysisResponseSchema.safeParse(parsed)
+    if (!validation.success) {
+      throw new Error('Estructura de respuesta inválida de la IA')
+    }
+
+    return NextResponse.json(validation.data)
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Error desconocido'
-    console.error('[/api/gemini/analyze] Error:', message)
     return NextResponse.json(
-      { error: 'La IA está ocupada, inténtalo de nuevo en unos segundos.' },
+      { error: message.startsWith('La IA') || message.includes('IA')
+          ? message
+          : 'La IA está ocupada, inténtalo de nuevo en unos segundos.' },
       { status: 502 }
     )
   }

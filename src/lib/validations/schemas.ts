@@ -56,3 +56,22 @@ export const generateRequestSchema = z.object({
 
 export type AnalyzeRequestInput = z.infer<typeof analyzeRequestSchema>
 export type GenerateRequestInput = z.infer<typeof generateRequestSchema>
+
+// ---------------------------------------------------------------------------
+// Schema de validación para la respuesta JSON de Gemini (análisis facial)
+// ---------------------------------------------------------------------------
+
+const recommendationSchema = z.object({
+  name: z.string().min(1),
+  description: z.string().min(1),
+  suitability: z.string().min(1),
+  visualPrompt: z.string().min(10),
+})
+
+export const geminiAnalysisResponseSchema = z.object({
+  faceShape: z.enum(['ovalado', 'redondo', 'cuadrado', 'rectangular', 'triangular', 'corazon']),
+  confidence: z.number().min(0).max(1),
+  recommendations: z.tuple([recommendationSchema, recommendationSchema]),
+})
+
+export type GeminiAnalysisResponseInput = z.infer<typeof geminiAnalysisResponseSchema>

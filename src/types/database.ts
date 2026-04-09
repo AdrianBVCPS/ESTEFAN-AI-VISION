@@ -41,16 +41,19 @@ export interface Database {
       }
       app_config: {
         Row: {
+          id: string
           key: string
           value: Json
           updated_at: string
         }
         Insert: {
+          id?: string
           key: string
           value: Json
           updated_at?: string
         }
         Update: {
+          id?: string
           key?: string
           value?: Json
           updated_at?: string
@@ -61,7 +64,10 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      increment_gemini_usage: {
+        Args: { p_key: string; p_limit: number }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never

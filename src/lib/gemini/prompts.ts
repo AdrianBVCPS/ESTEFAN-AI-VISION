@@ -62,7 +62,7 @@ Use ${prefMap.beard[p.beard]} in the visualPrompt when describing the face.`
 }
 
 /** Construye el prompt de generación de imagen para Modo A */
-export function buildGeneratePromptModeA(visualPrompt: string, _title: string): string {
+export function buildGeneratePromptModeA(visualPrompt: string): string {
   return `${visualPrompt}
 
 NEGATIVE: Do not change facial features. Do not show the person's face clearly. Focus entirely on hair. No text or watermarks.`
