@@ -57,12 +57,18 @@ function CameraCapture({ angle, onCapture }: CameraCaptureProps) {
 
     if (videoRef.current) {
       videoRef.current.srcObject = stream
+
+      // Esperar a que el video tenga frames antes de habilitar la captura
+      videoRef.current.oncanplay = () => {
+        setEstado('ready')
+      }
+
       videoRef.current.play().catch(() => {
         // play() puede rechazarse si el componente se desmontó mientras esperaba
       })
+    } else {
+      setEstado('ready')
     }
-
-    setEstado('ready')
   }, [])
 
   // Montar y desmontar

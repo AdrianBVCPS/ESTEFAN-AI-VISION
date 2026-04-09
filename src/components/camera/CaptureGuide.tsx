@@ -14,14 +14,15 @@ const INSTRUCCIONES: Record<PhotoAngle, string> = {
 }
 
 // Silueta frontal: óvalo vertical centrado representando la cabeza de frente
+// Coordenadas en unidades del viewBox (0 0 100 100) — consistente con las demás siluetas
 function SiluetaFrontal() {
   return (
     <g>
       {/* Cuello */}
-      <rect x="46%" y="61%" width="8%" height="10%" rx="2"
+      <rect x="46" y="61" width="8" height="10" rx="2"
         fill="none" stroke="#D4A854" strokeOpacity="0.4" strokeWidth="2" />
       {/* Cabeza — óvalo vertical */}
-      <ellipse cx="50%" cy="44%" rx="18%" ry="22%"
+      <ellipse cx="50" cy="44" rx="18" ry="22"
         fill="none" stroke="#D4A854" strokeOpacity="0.4" strokeWidth="2" />
     </g>
   )

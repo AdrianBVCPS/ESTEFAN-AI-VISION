@@ -48,12 +48,14 @@ export default function PreferencesPage() {
     hairType: 'liso',
   })
 
-  // Guardia: sin 3 fotos, volver a captura
+  // Guardia: sin 3 fotos o modo incorrecto, redirigir
   useEffect(() => {
     if (consultation.photos.length < 3) {
       router.replace('/capture')
+    } else if (consultation.mode !== 'a') {
+      router.replace('/mode-select')
     }
-  }, [consultation.photos.length, router])
+  }, [consultation.photos.length, consultation.mode, router])
 
   const handleAnalyze = () => {
     consultation.setPreferences(prefs)
@@ -86,7 +88,7 @@ export default function PreferencesPage() {
       {/* Tira de fotos capturadas */}
       <div
         className="shrink-0"
-        style={{ background: '#1A1A2E', borderBottom: '1px solid rgba(255,255,255,0.06)' }}
+        style={{ background: '#1A1A2E', boxShadow: '0 4px 8px rgba(0,0,0,0.15)' }}
       >
         <PhotoStrip photos={consultation.photos} totalAngles={3} />
       </div>

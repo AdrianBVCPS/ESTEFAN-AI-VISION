@@ -26,12 +26,14 @@ export default function DescribePage() {
 
   const [text, setText] = useState(consultation.description ?? '')
 
-  // Guardia: sin 3 fotos, volver a captura
+  // Guardia: sin 3 fotos o modo incorrecto, redirigir
   useEffect(() => {
     if (consultation.photos.length < 3) {
       router.replace('/capture')
+    } else if (consultation.mode !== 'b') {
+      router.replace('/mode-select')
     }
-  }, [consultation.photos.length, router])
+  }, [consultation.photos.length, consultation.mode, router])
 
   // Añadir sugerencia al texto existente
   const handleSugerencia = (sugerencia: string) => {
@@ -82,7 +84,7 @@ export default function DescribePage() {
       {/* Tira de fotos capturadas */}
       <div
         className="shrink-0"
-        style={{ background: '#1A1A2E', borderBottom: '1px solid rgba(255,255,255,0.06)' }}
+        style={{ background: '#1A1A2E', boxShadow: '0 4px 8px rgba(0,0,0,0.15)' }}
       >
         <PhotoStrip photos={consultation.photos} totalAngles={3} />
       </div>

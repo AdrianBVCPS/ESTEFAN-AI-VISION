@@ -106,12 +106,11 @@ export async function compressImage(blob: Blob, maxDimension = 1024): Promise<Bl
   if (typeof OffscreenCanvas !== 'undefined' && typeof createImageBitmap !== 'undefined') {
     const bitmap = await createImageBitmap(blob)
     const dims = calcularDimensiones(bitmap.width, bitmap.height, maxDimension)
+    // Comparar ANTES de cerrar el bitmap para evitar acceso a valores tras close()
+    const yaEsPequena = dims.width === bitmap.width && dims.height === bitmap.height
     bitmap.close()
 
-    // Si ya cabe sin redimensionar, devolver el original para no re-comprimir
-    if (dims.width === bitmap.width && dims.height === bitmap.height) {
-      return blob
-    }
+    if (yaEsPequena) return blob
 
     return comprimirConOffscreenCanvas(blob, dims.width, dims.height)
   }
@@ -120,8 +119,9 @@ export async function compressImage(blob: Blob, maxDimension = 1024): Promise<Bl
   if (typeof createImageBitmap !== 'undefined') {
     const bitmap = await createImageBitmap(blob)
     const dims = calcularDimensiones(bitmap.width, bitmap.height, maxDimension)
+    const yaEsPequena = dims.width === bitmap.width && dims.height === bitmap.height
 
-    if (dims.width === bitmap.width && dims.height === bitmap.height) {
+    if (yaEsPequena) {
       bitmap.close()
       return blob
     }

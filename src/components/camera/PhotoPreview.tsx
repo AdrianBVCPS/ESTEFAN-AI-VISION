@@ -69,8 +69,8 @@ function PhotoPreview({ url, angle, onRetake, onConfirm, loading = false }: Phot
             size="lg"
             onClick={onRetake}
             disabled={loading}
-            className="flex-1 text-background border border-white/20"
-            style={{ color: '#F5F0EB' } as React.CSSProperties}
+            className="flex-1"
+            style={{ color: '#F5F0EB', background: 'rgba(255,255,255,0.1)' } as React.CSSProperties}
           >
             <RotateCcw size={18} strokeWidth={1.5} />
             Repetir
