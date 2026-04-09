@@ -87,6 +87,18 @@
   40%           { opacity: 1; }
 }
 
+/* Fade-in para PhotoPreview */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Slide horizontal entre pantallas del flujo */
+@keyframes slide-in-right {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
 .loading-dots span {
   animation: loading-dot 1.4s infinite;
 }
