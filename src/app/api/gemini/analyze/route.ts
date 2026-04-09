@@ -4,8 +4,8 @@ import { analyzeRequestSchema, geminiAnalysisResponseSchema } from '@/lib/valida
 import { buildAnalyzePrompt, ANALYZE_SYSTEM_INSTRUCTION } from '@/lib/gemini/prompts'
 import { checkAndIncrementUsage } from '@/lib/gemini/rate-limit'
 
-// gemini-2.5-flash-lite: modelo de texto más económico, ideal para análisis JSON
-const MODEL_ANALYZE = 'gemini-2.5-flash-lite'
+// gemini-3-flash-preview: inteligencia Pro en velocidad Flash, mejor análisis facial
+const MODEL_ANALYZE = 'gemini-3-flash-preview'
 
 export async function POST(request: NextRequest) {
   // 1. Validar que la API key esté configurada
