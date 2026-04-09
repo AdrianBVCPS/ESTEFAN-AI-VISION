@@ -104,3 +104,16 @@
 }
 .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
 .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+/* Fade para textos rotativos en loading-ai */
+@keyframes fadeInText {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Barra de progreso indeterminada deslizante */
+@keyframes progressSlide {
+  0%   { transform: translateX(-100%); }
+  50%  { transform: translateX(250%); }
+  100% { transform: translateX(250%); }
+}

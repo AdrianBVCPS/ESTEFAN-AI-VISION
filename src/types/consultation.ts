@@ -1,6 +1,10 @@
 // Tipos compartidos para el flujo de consulta de Estefan AI Vision.
 // Todo el estado vive en memoria del cliente — sin persistencia en servidor.
 
+import type { Recommendation } from '@/lib/gemini/types'
+
+export type { Recommendation }
+
 /** Ángulo desde el que se captura la foto del cliente */
 export type PhotoAngle = 'frontal' | 'lateral' | 'trasera'
 
@@ -33,10 +37,8 @@ export interface Preferences {
  */
 export interface AnalysisResult {
   faceShape: 'ovalado' | 'redondo' | 'cuadrado' | 'rectangular' | 'triangular' | 'corazon'
-  skinTone: string          // descripción libre del tono de piel
-  currentStyle: string      // descripción del estilo actual detectado
-  recommendations: string[] // 2-3 recomendaciones de peinado en texto
-  confidence: number        // 0-1, confianza del análisis
+  recommendations: Recommendation[]  // exactamente 2 recomendaciones de peinado
+  confidence: number                  // 0-1, confianza del análisis
 }
 
 /**

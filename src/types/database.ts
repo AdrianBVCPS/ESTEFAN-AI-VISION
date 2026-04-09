@@ -7,6 +7,10 @@ export type Json =
   | Json[]
 
 export interface Database {
+  // Requerido por @supabase/supabase-js >= 2.101
+  __InternalSupabase: {
+    PostgrestVersion: '12'
+  }
   public: {
     Tables: {
       barber_profiles: {
@@ -37,19 +41,16 @@ export interface Database {
       }
       app_config: {
         Row: {
-          id: string
           key: string
           value: Json
           updated_at: string
         }
         Insert: {
-          id?: string
           key: string
           value: Json
           updated_at?: string
         }
         Update: {
-          id?: string
           key?: string
           value?: Json
           updated_at?: string
