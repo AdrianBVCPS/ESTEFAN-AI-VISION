@@ -7,7 +7,6 @@ import { Button } from '@/components/ui'
 import { ResultCard } from '@/components/results'
 import { EAMonogram } from '@/components/shared/EAMonogram'
 import { useConsultation } from '@/lib/utils/consultation-context'
-import type { GeneratedImage } from '@/types/consultation'
 
 export default function ResultsPage() {
   const router = useRouter()
@@ -19,16 +18,6 @@ export default function ResultsPage() {
       router.replace('/')
     }
   }, [consultation.generatedImages.length, router])
-
-  // Descarga la imagen como archivo JPEG
-  const handleDownload = (image: GeneratedImage, title: string) => {
-    const a = document.createElement('a')
-    a.href = image.url
-    const fecha = new Date().toISOString().slice(0, 16).replace('T', '-').replace(':', '')
-    const nombreArchivo = `estefan-ai-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${fecha}.jpg`
-    a.download = nombreArchivo
-    a.click()
-  }
 
   const handleNuevaConsulta = () => {
     consultation.reset()
@@ -88,7 +77,7 @@ export default function ResultsPage() {
                   image={img}
                   recommendation={consultation.analysisResult!.recommendations[i]}
                   index={i}
-                  onDownload={handleDownload}
+                  onDownload={() => router.push(`/share?index=${i}`)}
                 />
               </div>
             ))}
@@ -102,7 +91,7 @@ export default function ResultsPage() {
                 image={img}
                 recommendation={consultation.analysisResult!.recommendations[i]}
                 index={i}
-                onDownload={handleDownload}
+                onDownload={() => router.push(`/share?index=${i}`)}
               />
             ))}
           </div>
@@ -215,7 +204,7 @@ export default function ResultsPage() {
             variant="secondary"
             size="md"
             fullWidth
-            onClick={() => handleDownload(imagen, imagen.title)}
+            onClick={() => router.push('/share?index=0')}
           >
             <Download size={16} strokeWidth={1.5} />
             Descargar

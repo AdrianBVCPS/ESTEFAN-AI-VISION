@@ -6,3 +6,5 @@ export type { ToastItem, ToastType, ToastProps } from './Toast'
 
 export { ErrorMessage } from './ErrorMessage'
 export type { ErrorMessageProps } from './ErrorMessage'
+
+export { ServiceWorkerRegistration } from './ServiceWorkerRegistration'

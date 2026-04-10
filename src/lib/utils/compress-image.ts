@@ -5,8 +5,9 @@
 /**
  * Calcula nuevas dimensiones manteniendo el aspect ratio.
  * Si ambos lados son menores que maxDimension, devuelve las dimensiones originales.
+ * Exportada para tests unitarios.
  */
-function calcularDimensiones(
+export function calcularDimensiones(
   width: number,
   height: number,
   maxDimension: number,
