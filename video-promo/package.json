@@ -1,0 +1,25 @@
+{
+  "name": "estefan-ai-vision-promo",
+  "version": "1.0.0",
+  "description": "Video promocional Estefan AI Vision",
+  "scripts": {
+    "start": "remotion studio",
+    "build": "remotion render PromoVideo out/estefan-ai-vision-promo.mp4 --gl=swangle",
+    "gen-images": "node generate-images.mjs"
+  },
+  "dependencies": {
+    "@google/genai": "^1.0.1",
+    "@remotion/cli": "^4.0.446",
+    "@remotion/google-fonts": "^4.0.291",
+    "@remotion/transitions": "^4.0.446",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "remotion": "^4.0.446"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.1",
+    "typescript": "^5.4.5"
+  }
+}
