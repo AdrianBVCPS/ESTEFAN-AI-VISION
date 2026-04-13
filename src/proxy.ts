@@ -1,7 +1,34 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
 
+// Email del superadmin — acceso total sin verificar suscripción
+const SUPERADMIN_EMAIL = 'adriangarciamendez87@gmail.com'
+
+// Rutas que no requieren sesión ni suscripción
+const PUBLIC_PATHS = [
+  '/login',
+  '/blocked',
+  '/api/stripe/webhook',
+  '/_next',
+  '/favicon',
+  '/icons',
+  '/manifest',
+  '/sw.js',
+]
+
 export async function proxy(request: NextRequest) {
+  const { pathname } = request.nextUrl
+
+  // Archivos estáticos — pasar directamente
+  if (/\.(png|jpg|svg|ico|webp|json|txt|js|css|woff2?)$/.test(pathname)) {
+    return NextResponse.next()
+  }
+
+  // Rutas públicas — no requieren sesión
+  if (PUBLIC_PATHS.some(p => pathname.startsWith(p))) {
+    return NextResponse.next()
+  }
+
   let supabaseResponse = NextResponse.next({ request })
 
   const supabase = createServerClient(
@@ -25,22 +52,69 @@ export async function proxy(request: NextRequest) {
     }
   )
 
-  // Refresca la sesión — importante para SSR
+  // Refresca la sesión y obtiene el usuario
   const { data: { user } } = await supabase.auth.getUser()
 
-  const { pathname } = request.nextUrl
-
-  // Rutas protegidas: redirige a /login si no hay sesión
-  const isProtectedRoute = !pathname.startsWith('/login') && !pathname.startsWith('/_next') && !pathname.startsWith('/api') && !pathname.startsWith('/icons') && !pathname.match(/\.(png|jpg|svg|ico|webp|json|txt)$/)
-
-  if (isProtectedRoute && !user) {
+  // Sin sesión → redirigir a login (o 401 para API routes)
+  if (!user) {
+    if (pathname.startsWith('/api/')) {
+      return NextResponse.json({ error: 'No autenticado' }, { status: 401 })
+    }
+    // Si ya va a /login, pasar
+    if (pathname === '/login') return supabaseResponse
     const url = request.nextUrl.clone()
     url.pathname = '/login'
     return NextResponse.redirect(url)
   }
 
-  // Si ya tiene sesión y va a /login, redirige al home
-  if (pathname === '/login' && user) {
+  // Superadmin por email → acceso total siempre
+  if (user.email === SUPERADMIN_EMAIL) {
+    // Si va a /login con sesión activa, redirigir al home
+    if (pathname === '/login') {
+      const url = request.nextUrl.clone()
+      url.pathname = '/'
+      return NextResponse.redirect(url)
+    }
+    return supabaseResponse
+  }
+
+  // Usuario con sesión → redirigir de /login al home
+  if (pathname === '/login') {
+    const url = request.nextUrl.clone()
+    url.pathname = '/'
+    return NextResponse.redirect(url)
+  }
+
+  // Rutas de API → dejar pasar (cada handler verifica auth internamente)
+  if (pathname.startsWith('/api/')) {
+    return supabaseResponse
+  }
+
+  // Para páginas de barbero: verificar subscription_status
+  const { data: profile } = await supabase
+    .from('barber_profiles')
+    .select('role, subscription_status')
+    .eq('id', user.id)
+    .maybeSingle()
+
+  // Superadmin por rol (segunda verificación)
+  if (profile?.role === 'superadmin') {
+    return supabaseResponse
+  }
+
+  const status = profile?.subscription_status ?? 'pending'
+  const tieneAcceso = status === 'active' || status === 'trialing'
+
+  // Sin suscripción activa → bloquear (excepto si ya está en /blocked)
+  if (!tieneAcceso && pathname !== '/blocked') {
+    const url = request.nextUrl.clone()
+    url.pathname = '/blocked'
+    url.searchParams.set('reason', status)
+    return NextResponse.redirect(url)
+  }
+
+  // Con suscripción activa en /blocked → redirigir al home
+  if (tieneAcceso && pathname === '/blocked') {
     const url = request.nextUrl.clone()
     url.pathname = '/'
     return NextResponse.redirect(url)

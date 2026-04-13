@@ -1,9 +1,45 @@
+'use client'
+
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { Scissors } from 'lucide-react'
+import { Scissors, Settings } from 'lucide-react'
+import { createClient } from '@/lib/supabase/client'
 
 export default function HomePage() {
+  const [esSuperadmin, setEsSuperadmin] = useState(false)
+  const supabase = createClient()
+
+  // Detectar si el usuario es superadmin para mostrar el acceso al panel
+  // Cast necesario: @supabase/ssr@0.10 no resuelve bien el tipo genérico del select
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (!user) return
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ;(supabase as any)
+        .from('barber_profiles')
+        .select('role')
+        .eq('id', user.id)
+        .single()
+        .then(({ data }: { data: { role: string } | null }) => {
+          if (data?.role === 'superadmin') setEsSuperadmin(true)
+        })
+    })
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
-    <div className="flex flex-col items-center justify-between min-h-[calc(100vh-56px)] px-6 py-12 bg-background">
+    <div className="relative flex flex-col items-center justify-between min-h-[calc(100vh-56px)] px-6 py-12 bg-background">
+
+      {/* Icono de admin — solo visible para superadmin, esquina superior derecha */}
+      {esSuperadmin && (
+        <Link
+          href="/admin"
+          aria-label="Ir al panel admin"
+          className="absolute top-4 right-4 transition-opacity hover:opacity-100"
+          style={{ color: 'rgba(212,168,84,0.4)' }}
+        >
+          <Settings size={20} strokeWidth={1.5} />
+        </Link>
+      )}
 
       {/* Espaciador superior */}
       <div />

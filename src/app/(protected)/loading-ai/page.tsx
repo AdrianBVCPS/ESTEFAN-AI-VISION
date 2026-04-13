@@ -7,6 +7,19 @@ import { EAMonogram } from '@/components/shared/EAMonogram'
 import { Button } from '@/components/ui'
 import { useConsultation } from '@/lib/utils/consultation-context'
 import { analyzeFace, generateImage } from '@/lib/gemini/client'
+import { createClient } from '@/lib/supabase/client'
+
+// Registra un uso de IA en background — fire-and-forget, nunca bloquea el flujo.
+// Workaround de cast necesario: @supabase/ssr@0.10 no resuelve el genérico
+// de Insert para tablas añadidas post-generación de tipos.
+function registrarUso(mode: 'mode_a' | 'mode_b') {
+  const supabase = createClient()
+  supabase.auth.getUser().then(({ data: { user } }) => {
+    if (!user) return
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ;(supabase as any).from('usage_logs').insert({ user_id: user.id, mode }).then(() => {})
+  })
+}
 
 const TEXTOS_MODO_A = [
   'Analizando la forma de tu rostro...',
@@ -73,6 +86,10 @@ export default function LoadingAIPage() {
 
         consultation.setGeneratedImages([img1, img2])
 
+        // Registrar uso en background — fire-and-forget, no bloquea el flujo
+        // Cast necesario: @supabase/ssr@0.10 no resuelve el genérico de tablas nuevas
+        registrarUso('mode_a')
+
       } else if (consultation.mode === 'b') {
         // Modo B: generar una sola imagen basada en la descripción del barbero
         if (!consultation.description) throw new Error('Falta la descripción del corte')
@@ -84,6 +101,9 @@ export default function LoadingAIPage() {
         )
 
         consultation.setGeneratedImages([img])
+
+        // Registrar uso en background
+        registrarUso('mode_b')
 
       } else {
         router.replace('/mode-select')
