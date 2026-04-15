@@ -4,8 +4,8 @@ import { generateRequestSchema } from '@/lib/validations/schemas'
 import { buildGeneratePromptModeA, buildGeneratePromptModeB } from '@/lib/gemini/prompts'
 import { checkAndIncrementUsage } from '@/lib/gemini/rate-limit'
 
-// gemini-3.1-flash-image-preview: Nano Banana 2 — mejor consistencia de personaje
-const MODEL_GENERATE = 'gemini-3.1-flash-image-preview'
+// gemini-3-pro-image-preview: mejor calidad de imagen disponible (Gemini 3 Pro)
+const MODEL_GENERATE = 'gemini-3-pro-image-preview'
 
 export async function POST(request: NextRequest) {
   const apiKey = process.env.GEMINI_API_KEY
