@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { GoogleGenAI } from '@google/genai'
 import { generateRequestSchema } from '@/lib/validations/schemas'
 import { buildGeneratePromptModeA, buildGeneratePromptModeB } from '@/lib/gemini/prompts'
-import { checkAndIncrementUsage } from '@/lib/gemini/rate-limit'
+import { checkAndIncrementGenerateUsage } from '@/lib/gemini/rate-limit'
 
 // gemini-3-pro-image-preview: mejor calidad de imagen disponible (Gemini 3 Pro)
 const MODEL_GENERATE = 'gemini-3-pro-image-preview'
@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
   }
 
   // Rate limiting — la generación de imagen es la operación más costosa
-  const usageOk = await checkAndIncrementUsage()
+  const usageOk = await checkAndIncrementGenerateUsage()
   if (!usageOk) {
     return NextResponse.json(
       { error: 'Has alcanzado el límite diario de consultas. Inténtalo mañana.' },

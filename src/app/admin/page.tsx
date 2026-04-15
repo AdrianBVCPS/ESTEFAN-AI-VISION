@@ -229,6 +229,152 @@ function TabDashboard() {
 
 // ─── Pestaña Usuarios ─────────────────────────────────────────────────────────
 
+// ─── Formulario nuevo usuario ──────────────────────────────────────────────────
+
+interface NuevoUsuarioForm {
+  email: string
+  password: string
+  display_name: string
+  role: 'barber' | 'superadmin'
+}
+
+function FormNuevoUsuario({ onCreado }: { onCreado: () => void }) {
+  const [form, setForm] = useState<NuevoUsuarioForm>({
+    email: '', password: '', display_name: '', role: 'barber',
+  })
+  const [creando, setCreando] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [ok, setOk] = useState(false)
+  const [abierto, setAbierto] = useState(false)
+
+  const set = (k: keyof NuevoUsuarioForm) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
+    setForm(prev => ({ ...prev, [k]: e.target.value }))
+
+  const crear = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setCreando(true)
+    setError(null)
+    setOk(false)
+    try {
+      const res = await fetch('/api/admin/create-user', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      const d = await res.json()
+      if (!res.ok) throw new Error(d.error ?? 'Error al crear usuario')
+      setOk(true)
+      setForm({ email: '', password: '', display_name: '', role: 'barber' })
+      setAbierto(false)
+      onCreado()
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error desconocido')
+    } finally {
+      setCreando(false)
+    }
+  }
+
+  const inputStyle = {
+    background: 'rgba(26,26,46,0.04)',
+    color: '#1A1A2E',
+    border: '1px solid rgba(26,26,46,0.10)',
+  }
+
+  return (
+    <div className="mb-6">
+      {!abierto ? (
+        <button
+          onClick={() => { setAbierto(true); setOk(false) }}
+          className="font-ui font-bold text-sm px-4 py-2.5 rounded-xl transition-opacity hover:opacity-80 cursor-pointer"
+          style={{ background: '#D4A854', color: '#1A1A2E' }}
+        >
+          + Nuevo usuario
+        </button>
+      ) : (
+        <form
+          onSubmit={crear}
+          className="rounded-2xl p-5"
+          style={{ background: '#fff', boxShadow: '0 4px 12px rgba(0,0,0,0.06)' }}
+        >
+          <h3 className="font-display font-bold text-base mb-4" style={{ color: '#1A1A2E' }}>
+            Nuevo usuario
+          </h3>
+
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className="flex flex-col gap-1">
+              <label className="font-ui text-xs font-bold uppercase tracking-wide" style={{ color: '#6B7280' }}>Nombre</label>
+              <input
+                type="text" required value={form.display_name} onChange={set('display_name')}
+                placeholder="Nombre visible"
+                className="rounded-lg px-3 py-2 font-ui text-sm outline-none"
+                style={inputStyle}
+              />
+            </div>
+
+            <div className="flex flex-col gap-1">
+              <label className="font-ui text-xs font-bold uppercase tracking-wide" style={{ color: '#6B7280' }}>Rol</label>
+              <select
+                value={form.role} onChange={set('role')}
+                className="rounded-lg px-3 py-2 font-ui text-sm outline-none cursor-pointer"
+                style={inputStyle}
+              >
+                <option value="barber">Barbero</option>
+                <option value="superadmin">Superadmin</option>
+              </select>
+            </div>
+
+            <div className="flex flex-col gap-1">
+              <label className="font-ui text-xs font-bold uppercase tracking-wide" style={{ color: '#6B7280' }}>Email</label>
+              <input
+                type="email" required value={form.email} onChange={set('email')}
+                placeholder="usuario@email.com"
+                className="rounded-lg px-3 py-2 font-ui text-sm outline-none"
+                style={inputStyle}
+              />
+            </div>
+
+            <div className="flex flex-col gap-1">
+              <label className="font-ui text-xs font-bold uppercase tracking-wide" style={{ color: '#6B7280' }}>Contraseña</label>
+              <input
+                type="password" required minLength={8} value={form.password} onChange={set('password')}
+                placeholder="Mínimo 8 caracteres"
+                className="rounded-lg px-3 py-2 font-ui text-sm outline-none"
+                style={inputStyle}
+              />
+            </div>
+          </div>
+
+          {error && (
+            <p className="font-ui text-xs mt-3" style={{ color: '#EF4444' }}>{error}</p>
+          )}
+
+          <div className="flex gap-2 mt-4">
+            <button
+              type="submit" disabled={creando}
+              className="font-ui font-bold text-sm px-4 py-2 rounded-lg transition-opacity hover:opacity-80 disabled:opacity-40 cursor-pointer"
+              style={{ background: '#1A1A2E', color: '#F5F0EB' }}
+            >
+              {creando ? 'Creando...' : 'Crear usuario'}
+            </button>
+            <button
+              type="button" onClick={() => setAbierto(false)}
+              className="font-ui text-sm px-4 py-2 rounded-lg transition-opacity hover:opacity-70 cursor-pointer"
+              style={{ color: '#6B7280' }}
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
+      )}
+      {ok && !abierto && (
+        <p className="font-ui text-xs mt-2" style={{ color: '#4ECDC4' }}>Usuario creado correctamente</p>
+      )}
+    </div>
+  )
+}
+
+// ─── Pestaña Usuarios ─────────────────────────────────────────────────────────
+
 function TabUsuarios() {
   const [usuarios, setUsuarios] = useState<UserWithStats[]>([])
   const [cargando, setCargando] = useState(true)
@@ -313,6 +459,9 @@ function TabUsuarios() {
       {error && (
         <p className="font-ui text-sm mb-4" style={{ color: '#EF4444' }}>{error}</p>
       )}
+
+      {/* Formulario nuevo usuario */}
+      <FormNuevoUsuario onCreado={cargarUsuarios} />
 
       {/* Tabla — scroll horizontal en móvil */}
       <div
