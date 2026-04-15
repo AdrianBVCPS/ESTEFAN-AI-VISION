@@ -4,8 +4,8 @@ import { analyzeRequestSchema, geminiAnalysisResponseSchema } from '@/lib/valida
 import { buildAnalyzePrompt, ANALYZE_SYSTEM_INSTRUCTION } from '@/lib/gemini/prompts'
 import { checkAndIncrementUsage } from '@/lib/gemini/rate-limit'
 
-// gemini-3-flash-preview: inteligencia Pro en velocidad Flash, mejor análisis facial
-const MODEL_ANALYZE = 'gemini-3-flash-preview'
+// gemini-2.5-flash: modelo estable con visión, ideal para análisis facial
+const MODEL_ANALYZE = 'gemini-2.5-flash'
 
 export async function POST(request: NextRequest) {
   // 1. Validar que la API key esté configurada
@@ -91,6 +91,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(validation.data)
   } catch (error) {
+    console.error('[Gemini analyze] Error:', error)
     const message = error instanceof Error ? error.message : 'Error desconocido'
     return NextResponse.json(
       { error: message.startsWith('La IA') || message.includes('IA')

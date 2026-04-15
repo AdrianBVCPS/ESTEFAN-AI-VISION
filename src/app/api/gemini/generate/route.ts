@@ -4,8 +4,8 @@ import { generateRequestSchema } from '@/lib/validations/schemas'
 import { buildGeneratePromptModeA, buildGeneratePromptModeB } from '@/lib/gemini/prompts'
 import { checkAndIncrementUsage } from '@/lib/gemini/rate-limit'
 
-// gemini-3.1-flash-image-preview: Nano Banana 2 — mejor consistencia de personaje
-const MODEL_GENERATE = 'gemini-3.1-flash-image-preview'
+// gemini-2.0-flash-preview-image-generation: modelo oficial de Gemini para salida nativa de imagen
+const MODEL_GENERATE = 'gemini-2.0-flash-preview-image-generation'
 
 export async function POST(request: NextRequest) {
   const apiKey = process.env.GEMINI_API_KEY
@@ -80,6 +80,7 @@ export async function POST(request: NextRequest) {
       title,
     })
   } catch (error) {
+    console.error('[Gemini generate] Error:', error)
     const message = error instanceof Error ? error.message : 'Error desconocido'
     return NextResponse.json(
       { error: message === 'Gemini no devolvió imagen'
