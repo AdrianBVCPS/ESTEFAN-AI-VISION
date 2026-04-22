@@ -7,6 +7,7 @@ import { stripe, STRIPE_PRICE_ID, isSuperadmin } from '@/lib/stripe'
 const bodySchema = z.object({ target_user_id: z.string().uuid() })
 
 export async function POST(request: NextRequest) {
+  try {
   // Verificar superadmin
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
@@ -88,4 +89,9 @@ export async function POST(request: NextRequest) {
     .eq('id', target_user_id)
 
   return NextResponse.json({ success: true, trial_ends_at: trialEndsAt })
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Error desconocido'
+    console.error('[Stripe Trial Error]', message)
+    return NextResponse.json({ error: message }, { status: 500 })
+  }
 }
