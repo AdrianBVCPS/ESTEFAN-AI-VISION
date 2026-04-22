@@ -8,7 +8,9 @@ const SUPERADMIN_EMAIL = 'adriangarciamendez87@gmail.com'
 const PUBLIC_PATHS = [
   '/login',
   '/blocked',
+  '/look',
   '/api/stripe/webhook',
+  '/api/stripe/debug',
   '/_next',
   '/favicon',
   '/icons',
