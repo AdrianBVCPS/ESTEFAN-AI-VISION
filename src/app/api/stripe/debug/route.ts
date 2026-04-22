@@ -1,26 +1,33 @@
 import { NextResponse } from 'next/server'
-import Stripe from 'stripe'
 
 export async function GET() {
   const sk = process.env.STRIPE_SECRET_KEY ?? ''
   const priceId = process.env.STRIPE_PRICE_ID ?? ''
 
   const result: Record<string, unknown> = {
-    stripe_key_prefix: sk.slice(0, 20) + '...',
+    stripe_key_prefix: sk.slice(0, 25) + '...',
+    stripe_key_length: sk.length,
     price_id: priceId,
   }
 
+  // Test 1: fetch directo a Stripe (sin SDK)
   try {
-    const stripe = new Stripe(sk)
-    const prices = await stripe.prices.retrieve(priceId)
-    result.conexion = 'OK'
-    result.precio_amount = prices.unit_amount
-    result.precio_currency = prices.currency
-    result.precio_active = prices.active
+    const res = await fetch(`https://api.stripe.com/v1/prices/${priceId}`, {
+      headers: { Authorization: `Bearer ${sk}` },
+    })
+    const data = await res.json()
+    if (res.ok) {
+      result.fetch_test = 'OK'
+      result.precio_cents = data.unit_amount
+      result.precio_active = data.active
+    } else {
+      result.fetch_test = 'ERROR'
+      result.fetch_status = res.status
+      result.fetch_error = data.error?.message ?? JSON.stringify(data)
+    }
   } catch (err) {
-    result.conexion = 'ERROR'
-    result.error_type = err instanceof Stripe.errors.StripeError ? err.type : 'unknown'
-    result.error_message = err instanceof Error ? err.message : String(err)
+    result.fetch_test = 'NETWORK_ERROR'
+    result.fetch_error = err instanceof Error ? err.message : String(err)
   }
 
   return NextResponse.json(result)
