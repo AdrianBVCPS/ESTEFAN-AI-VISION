@@ -1,13 +1,6 @@
 import { NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
-import { isSuperadmin } from '@/lib/stripe'
 
 export async function GET() {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user || !isSuperadmin(user.email)) {
-    return NextResponse.json({ error: 'Acceso denegado' }, { status: 403 })
-  }
 
   const sk = process.env.STRIPE_SECRET_KEY ?? ''
   const priceId = process.env.STRIPE_PRICE_ID ?? ''
