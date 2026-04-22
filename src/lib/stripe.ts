@@ -1,9 +1,11 @@
 import Stripe from 'stripe'
 
 // Cliente Stripe server-side. Nunca exportar al cliente.
+// httpClient: fetch nativo — el cliente Node http falla en Vercel serverless.
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2026-03-25.dahlia',
   typescript: true,
+  httpClient: Stripe.createFetchHttpClient(),
 })
 
 // Precio de suscripción mensual (crear en Stripe Dashboard o vía script)
