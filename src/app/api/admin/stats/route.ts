@@ -51,7 +51,7 @@ export async function GET() {
     active_users: activeUsers ?? 0,
     trialing_users: trialingUsers ?? 0,
     pending_users: pendingUsers ?? 0,
-    revenue_this_month: (activeUsers ?? 0) * 12,
+    revenue_this_month: (activeUsers ?? 0) * 16,
     usage_today: todayUsage ?? 0,
     usage_this_month: monthUsage ?? 0,
     daily_usage_last_30: dailyMap,

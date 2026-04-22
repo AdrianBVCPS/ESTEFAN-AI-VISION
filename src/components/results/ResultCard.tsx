@@ -1,6 +1,6 @@
 'use client'
 
-import { Download } from 'lucide-react'
+import { Download, QrCode } from 'lucide-react'
 import { EAMonogram } from '@/components/shared/EAMonogram'
 import { Button } from '@/components/ui'
 import type { GeneratedImage } from '@/types/consultation'
@@ -9,8 +9,9 @@ import type { Recommendation } from '@/lib/gemini/types'
 interface ResultCardProps {
   image: GeneratedImage
   recommendation: Recommendation
-  index: number   // 0 o 1
+  index: number
   onDownload: (image: GeneratedImage, title: string) => void
+  onShare?: (image: GeneratedImage) => void
   onRegenerate?: () => void
   isRegenerating?: boolean
 }
@@ -20,6 +21,7 @@ export function ResultCard({
   recommendation,
   index,
   onDownload,
+  onShare,
   onRegenerate,
   isRegenerating,
 }: ResultCardProps) {
@@ -102,6 +104,17 @@ export function ResultCard({
           <Download size={16} strokeWidth={1.5} />
           Descargar
         </Button>
+        {onShare && (
+          <Button
+            variant="secondary"
+            size="md"
+            onClick={() => onShare(image)}
+            className="shrink-0"
+            style={{ minWidth: 44 }}
+          >
+            <QrCode size={16} strokeWidth={1.5} />
+          </Button>
+        )}
         {onRegenerate && (
           <Button
             variant="secondary"

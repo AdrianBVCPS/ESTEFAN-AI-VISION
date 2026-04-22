@@ -129,7 +129,7 @@ function BlockedContent() {
           onClick={handleActivar}
           style={{ height: 56, borderRadius: 12 }}
         >
-          {!cargandoStripe && 'Activar suscripción → 12€/mes'}
+          {!cargandoStripe && 'Activar suscripción → 16€/mes'}
           {cargandoStripe && 'Redirigiendo a Stripe...'}
         </Button>
 

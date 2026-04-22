@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { Home, Download, RefreshCw, Wand2 } from 'lucide-react'
+import { Home, Download, QrCode, RefreshCw, Wand2 } from 'lucide-react'
 import { Button } from '@/components/ui'
 import { ResultCard } from '@/components/results'
 import { EAMonogram } from '@/components/shared/EAMonogram'
@@ -78,6 +78,7 @@ export default function ResultsPage() {
                   recommendation={consultation.analysisResult!.recommendations[i]}
                   index={i}
                   onDownload={() => router.push(`/share?index=${i}`)}
+                  onShare={() => router.push(`/share?index=${i}`)}
                 />
               </div>
             ))}
@@ -92,6 +93,7 @@ export default function ResultsPage() {
                 recommendation={consultation.analysisResult!.recommendations[i]}
                 index={i}
                 onDownload={() => router.push(`/share?index=${i}`)}
+                onShare={() => router.push(`/share?index=${i}`)}
               />
             ))}
           </div>
@@ -208,6 +210,14 @@ export default function ResultsPage() {
           >
             <Download size={16} strokeWidth={1.5} />
             Descargar
+          </Button>
+          <Button
+            variant="secondary"
+            size="md"
+            onClick={() => router.push('/share?index=0')}
+            style={{ minWidth: 48 }}
+          >
+            <QrCode size={16} strokeWidth={1.5} />
           </Button>
           <Button
             variant="tertiary"

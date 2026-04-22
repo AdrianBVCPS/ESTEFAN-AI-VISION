@@ -1,22 +1,30 @@
 'use client'
 
-import { Suspense, useEffect, useRef, useState } from 'react'
+import { Suspense, useEffect, useRef, useState, useCallback } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Download, ArrowLeft } from 'lucide-react'
+import { Download, ArrowLeft, QrCode, X } from 'lucide-react'
+import QRCode from 'qrcode'
 import { Button } from '@/components/ui'
 import { EAMonogram } from '@/components/shared/EAMonogram'
 import { useConsultation } from '@/lib/utils/consultation-context'
 import { composeBrandedImage, getBrandedFilename } from '@/lib/canvas/compositor'
 
-// Contenido real de la pantalla — necesita useSearchParams → dentro de Suspense
 function ShareContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const consultation = useConsultation()
 
   const [brandedUrl, setBrandedUrl] = useState<string | null>(null)
+  const [brandedBlob, setBrandedBlob] = useState<Blob | null>(null)
   const [isComposing, setIsComposing] = useState(true)
   const [error, setError] = useState<string | null>(null)
+
+  // QR
+  const [qrDataUrl, setQrDataUrl] = useState<string | null>(null)
+  const [qrLoading, setQrLoading] = useState(false)
+  const [qrError, setQrError] = useState<string | null>(null)
+  const [showQrModal, setShowQrModal] = useState(false)
+  const shareIdRef = useRef<string | null>(null)
 
   const hasStarted = useRef(false)
   const mountedRef = useRef(true)
@@ -26,14 +34,12 @@ function ShareContent() {
   const image = consultation.generatedImages[index]
   const imageUrl = image?.url
 
-  // Guardia: si no hay imagen, volver al inicio
   useEffect(() => {
     if (!imageUrl) {
       router.replace('/')
     }
   }, [imageUrl, router])
 
-  // Componer la imagen con el banner de marca
   useEffect(() => {
     mountedRef.current = true
 
@@ -44,10 +50,10 @@ function ShareContent() {
 
     composeBrandedImage({ imageUrl })
       .then((blob) => {
-        // Si el componente se desmontó mientras componía, descartar el blob
         if (!mountedRef.current) return
         objectUrl = URL.createObjectURL(blob)
         setBrandedUrl(objectUrl)
+        setBrandedBlob(blob)
         setIsComposing(false)
       })
       .catch(() => {
@@ -78,9 +84,57 @@ function ShareContent() {
     a.click()
   }
 
+  const handleGenerarQR = useCallback(async () => {
+    if (!brandedBlob) return
+    if (shareIdRef.current) {
+      setShowQrModal(true)
+      return
+    }
+
+    setQrLoading(true)
+    setQrError(null)
+
+    try {
+      const formData = new FormData()
+      formData.append('image', brandedBlob, 'look.jpg')
+
+      const res = await fetch('/api/share', {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        throw new Error(data.error ?? 'Error al compartir')
+      }
+
+      const { id } = await res.json()
+      shareIdRef.current = id
+
+      const appUrl = window.location.origin
+      const lookUrl = `${appUrl}/look?id=${id}`
+
+      const dataUrl = await QRCode.toDataURL(lookUrl, {
+        width: 320,
+        margin: 2,
+        color: { dark: '#1A1A2E', light: '#F5F0EB' },
+        errorCorrectionLevel: 'M',
+      })
+
+      if (!mountedRef.current) return
+      setQrDataUrl(dataUrl)
+      setShowQrModal(true)
+    } catch (err) {
+      if (!mountedRef.current) return
+      setQrError(err instanceof Error ? err.message : 'Error al generar QR')
+    } finally {
+      setQrLoading(false)
+    }
+  }, [brandedBlob])
+
   if (!image) return null
 
-  /* ─── Estado: componiendo imagen ─── */
+  /* Estado: componiendo imagen */
   if (isComposing) {
     return (
       <div
@@ -98,7 +152,7 @@ function ShareContent() {
     )
   }
 
-  /* ─── Estado: error al componer ─── */
+  /* Estado: error al componer */
   if (error) {
     return (
       <div
@@ -126,7 +180,7 @@ function ShareContent() {
     )
   }
 
-  /* ─── Estado: imagen branded lista ─── */
+  /* Estado: imagen branded lista */
   return (
     <div
       className="flex flex-col min-h-[calc(100vh-56px)]"
@@ -187,11 +241,18 @@ function ShareContent() {
             Estefan Acosta Barber Shop · Lugo
           </p>
         </div>
+
+        {/* Error QR */}
+        {qrError && (
+          <p className="font-ui text-xs text-center" style={{ color: '#EF4444' }}>
+            {qrError}
+          </p>
+        )}
       </div>
 
-      {/* CTA fijo al fondo */}
+      {/* CTAs fijos al fondo */}
       <div
-        className="px-6 py-4 shrink-0"
+        className="px-6 py-4 shrink-0 flex flex-col gap-3"
         style={{
           background: 'rgba(26,26,46,0.96)',
           backdropFilter: 'blur(12px)',
@@ -201,12 +262,71 @@ function ShareContent() {
           <Download size={18} strokeWidth={1.5} />
           Descargar imagen
         </Button>
+        <Button
+          variant="secondary"
+          size="lg"
+          fullWidth
+          loading={qrLoading}
+          onClick={handleGenerarQR}
+        >
+          <QrCode size={18} strokeWidth={1.5} />
+          {qrLoading ? 'Generando QR...' : 'Mostrar QR al cliente'}
+        </Button>
       </div>
+
+      {/* Modal QR a pantalla completa */}
+      {showQrModal && qrDataUrl && (
+        <div
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center px-6"
+          style={{ background: 'rgba(26,26,46,0.97)' }}
+        >
+          <button
+            onClick={() => setShowQrModal(false)}
+            className="absolute top-4 right-4 p-2 rounded-full transition-opacity hover:opacity-70"
+            style={{ background: 'rgba(245,240,235,0.1)', color: '#F5F0EB' }}
+          >
+            <X size={20} strokeWidth={1.5} />
+          </button>
+
+          <p
+            className="font-mono text-xs uppercase tracking-widest mb-6"
+            style={{ color: 'rgba(212,168,84,0.7)' }}
+          >
+            ESCANEA PARA VER TU LOOK
+          </p>
+
+          <div
+            className="rounded-2xl p-6"
+            style={{ background: '#F5F0EB' }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={qrDataUrl}
+              alt="Código QR para ver tu look"
+              className="block"
+              style={{ width: 256, height: 256 }}
+            />
+          </div>
+
+          <p
+            className="font-ui text-sm text-center mt-6 max-w-xs"
+            style={{ color: 'rgba(245,240,235,0.6)' }}
+          >
+            El cliente escanea este QR con su móvil para ver el resultado
+          </p>
+
+          <p
+            className="font-mono text-xs mt-4"
+            style={{ color: 'rgba(245,240,235,0.3)' }}
+          >
+            Expira en unos minutos
+          </p>
+        </div>
+      )}
     </div>
   )
 }
 
-// Loading fallback mientras se resuelve useSearchParams
 function ShareLoading() {
   return (
     <div

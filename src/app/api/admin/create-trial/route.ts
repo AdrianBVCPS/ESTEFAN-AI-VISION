@@ -71,7 +71,8 @@ export async function POST(request: NextRequest) {
     customer: customerId,
     items: [{ price: STRIPE_PRICE_ID }],
     trial_period_days: trialDays,
-    payment_behavior: 'default_incomplete',
+    payment_behavior: 'allow_incomplete',
+    trial_settings: { end_behavior: { missing_payment_method: 'cancel' } },
     metadata: { supabase_user_id: target_user_id },
   })
 
